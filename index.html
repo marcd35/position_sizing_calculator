@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3DPW9XEWL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J3DPW9XEWL');
+    </script>
+    <meta property="og:title" content="Position Sizing Calculator: Total Account Risk %">
+    <meta property="og:description" content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!">
+    <meta property="og:image" content="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg">
+    <meta property="og:url" content="https://www.positionsizingcalculator.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg">
+    <!-- Local -->
+    <title>Position Sizing Calculator: Total Account Risk</title>
+    <link rel="stylesheet" type="text/css" href="calculator.css">
+    <script src="calculator.js" defer></script>
+</head>
+
+<body>
+    <!-- Main Container -->
+    <section id="top"></section>
+    <div class="container">
+        <div class="header">
+            <a href="https://www.reddit.com/r/swingtrading/" target="_blank"><img src="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;"></a>
+            <h1 class="title">Position Sizing Calculator</h1>
+        </div>
+        <hr>
+        <!-- Begin Input Container -->
+            <div>
+            <h3>Method 1: Total Account Risk Percentage Calculator</h3>
+            Usage: Determine position size based on the <b>percentage of your account</b> you want to risk.
+            <a href="calculatorinstructions.html" target="_blank">More Info</a>
+            <p>
+                <div class="input-container container">        
+        <div class="form-group">
+            <label>Account Value 
+                <span class="info-icon">ⓘ
+                    <span class="info-tooltip">The total amount of capital you have in your trading account. This is used to calculate the maximum risk and position allotment.</span>
+                </span>
+            </label>
+            <input type="number" id="accountValue" min="0" step="0.01" value="10000" required>
+        </div>
+
+        <div class="form-group">
+            <label for="riskPercentage">Total Account Risk %
+             <span class="info-icon">ⓘ
+                <span class="info-tooltip">
+                 The percentage of your total account value you are willing to risk on a single trade. This is used to calculate the maximum risk.
+                </span>
+            </span>
+             <p><input type="number" id="riskPercentage" name="riskPercentage" step="0.1" min="0" max="100" value="1">
+        </label>
+        
+       
+        <div class="preset-buttons">
+            <button type="button" onclick="setRisk(0.5)">0.5%</button>
+            <button type="button" onclick="setRisk(1)">1%</button>
+            <button type="button" onclick="setRisk(1.5)">1.5%</button>
+            <button type="button" onclick="setRisk(2)">2%</button>
+        </div>
+ <p></p>
+        <div class="form-group" style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label>Entry Price 
+                    <span class="info-icon">ⓘ
+                        <span class="info-tooltip">The price at which you plan to enter the trade.
+                        </span>
+                </label>
+                <input type="number" id="entryPrice" min="0" step="0.01" value="100" required>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Stop Loss 
+                    <span class="info-icon">ⓘ
+                        <span class="info-tooltip">The price at which you plan to exit the trade if it goes against you.
+                        </span>
+                    </span>
+                </label>
+                
+                <input type="number" id="stopLoss" min="0" step="0.01" value="90" required>
+            </div>
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label>Max Positions (optional) 
+                    <span class="info-icon">ⓘ
+                        <span class="info-tooltip">The maximum number of positions you want to hold in your account.
+                        </span>
+                    </span>
+                </label>
+                <input type="number" id="maxPositions" min="1">
+            </div>
+
+            <div style="flex: 1;">
+                <label>Ticker Symbol (optional) 
+                    <span class="info-icon">ⓘ
+                        <span class="info-tooltip">This field is for your own reference and does not affect calculations.
+                        </span>
+                    </span>
+                </label>
+                <input type="text" id="tickerSymbol">
+            </div>
+        </div>
+
+        <!-- The Button -->
+        <button onclick="calculate()">Calculate</button>
+        <button id="clearButton" style="background: red; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-left: 10px;">Clear</button>
+        <p></p><center>
+            <div class="scrolldown">
+                <a href="#disclaimer-info">Disclaimer</a> |
+                <a href="#about-info">About</a> |
+                <a href="#support-info">Support</a>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <center>
+    <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="https://www.positionsizingcalculator.com/media/redditicon.jpg" style="width:25px;height:25px;"></a>
+    <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="https://www.positionsizingcalculator.com/media/discordicon.png" style="width:25px;height:25px;"></a>
+    
+    <div>
+        <b>Other Calculators:</b>                  
+        Total Account Risk % |
+        <a href="dollarcalculator.html">Dollar Amount Risk</a> |
+        <a href="positionpercentcalculator.html">Position % Risk</a>
+    </div>
+    </center> 
+
+</div>
+        <!-- Results -->
+        <section id="result" class="results-section">
+            <h2>Position Sizing Calculations</h2>
+            <p style="color: blue; font-style: italic;">Click any blue result to copy to clipboard.</p>
+            <div id="position-indicator" class="position-indicator"></div>
+
+            <div class="result-item" onclick="copyToClipboard('max-shares')">
+                Max Shares: <span id="max-shares" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('position-size')">
+                Position Size: $<span id="position-size" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('risk-per-share')">
+                Risk per Share: $<span id="risk-per-share" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('percent-risked')">
+                Trade Risk: <span id="percent-risked" class="copyable">-</span>%
+            </div>
+            <div class="result-item" onclick="copyToClipboard('dollars-risked')">
+                Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('one-r')">
+                1R: $<span id="one-r" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('two-r')">
+                2R: $<span id="two-r" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('three-r')">
+                3R: $<span id="three-r" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('max-positions')">
+                Max Positions: <span id="max-positions" class="copyable">-</span>
+            </div>
+            <div class="result-item" onclick="copyToClipboard('position-allotment')">
+                Position Allotment: $<span id="position-allotment" class="copyable">-</span>
+            </div>
+        </section>
+
+        <!-- History -->
+        <div id="recent-results">
+            <h3>History</h3>
+                <div id="results-container">
+                </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const resultElements = document.querySelectorAll('.copyable');
+                resultElements.forEach(element => {
+                    element.addEventListener('click', function () {
+                        const range = document.createRange();
+                        range.selectNodeContents(element);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                        document.execCommand('copy');
+                        
+                        // Show copied animation
+                        const copiedFeedback = document.createElement('span');
+                        copiedFeedback.classList.add('copied-feedback');
+                        copiedFeedback.textContent = 'Copied!';
+                        document.body.appendChild(copiedFeedback);
+                        
+                        const rect = element.getBoundingClientRect();
+                        copiedFeedback.style.left = `${rect.left + window.scrollX}px`;
+                        copiedFeedback.style.top = `${rect.top + window.scrollY - 30}px`;
+                        
+                        setTimeout(() => {
+                            copiedFeedback.style.opacity = '1';
+                            copiedFeedback.style.transform = 'translateY(0)';
+                        }, 10);
+                        
+                        setTimeout(() => {
+                            copiedFeedback.style.opacity = '0';
+                            copiedFeedback.style.transform = 'translateY(-10px)';
+                            setTimeout(() => document.body.removeChild(copiedFeedback), 300);
+                        }, 1000);
+                    });
+                });
+            });
+            </script>
+
+         <!-- Instructions 
+        <p>
+        <section class="tutorial" id="tutorial-total-account-risk">  
+        <h2>How to Use the Total Account Risk Calculator</h2>
+        <p>Determine position size based on the percentage of your account you want to risk.</p>
+        <ul>
+            <li><strong>Step 1:</strong> Enter the total value of your trading account (e.g., $10,000).</li>
+            <li><strong>Step 2:</strong> Set the percentage of your account value you are willing to risk (e.g., 1%). Use preset buttons for quick selection.</li>
+            <li><strong>Step 3:</strong> Input your entry and stop-loss prices (e.g., entry at $50, stop loss at $45).</li>
+            <li><strong>Step 4 (Optional):</strong> Set a maximum number of positions if desired. This will divide your account value across each position (e.g., $10,000 split across 10 positions means $1,000 per position).</li>
+            <li><strong>Step 5 (Optional):</strong> Enter the ticker symbol of the stock or asset for reference (e.g., AAPL).</li>
+            <li><strong>Step 6:</strong> Click "Calculate" to see the maximum dollar amount you are willing to risk for the trade.</li>
+        </ul>
+        <p><em>Example:</em> If you are willing to risk 1% of your $10,000 account, the calculator will determine the amount you should risk based on your entry and stop-loss prices.</p>
+        For a more in-depth tutorial and how to interpret the results, visit: <a href="calculatorinstructions.html">Instructions</a>.
+    </section>
+-->
+    <p>
+        <!-- Disclaimer Section -->
+        <section class="disclaimer" id="disclaimer-info">
+            <h2>Disclaimer</h2>
+            <p>This calculator is for educational purposes only and does not constitute financial advice. Trading involves risk, and you should consult with a qualified financial professional before making any trading decisions. By using this calculator, you acknowledge that you assume all responsibility for your trades and the results thereof.</p>
+        </section>
+        <!-- About Section -->
+        <section class="about" id="about-info">
+            <h2>About</h2>
+            <p>This calculator was developed and maintained by <a href="https://www.reddit.com/r/swingtrading/" target="_blank">reddit.com/r/swingtrading</a> moderator <a href="https://www.reddit.com/user/cheungster/">Cheungster</a> in collaboration with <a href="https://chatgpt.com/">ChatGPT</a>.</p>
+            <p>At r/swingtrading, it has been my mission to provide evidence-based education and supporting an ongoing effort to empower traders in making smarter trading decisions by prioritizing <a href="https://www.investopedia.com/terms/r/riskmanagement.asp">risk management protocols</a>.</p>
+            <p>Visit our subreddit! <a href="https://www.reddit.com/r/swingtrading/" target="_blank">r/swingtrading!</a></p>
+            <p>Come chat in our <a href="https://discord.gg/yWFavAVQpm" target="_blank">Discord!</a></p>
+        </section>
+        <!-- Support Section -->                        
+        <section class="support" id="support-info">
+            <h2>Support</h2>
+            <p>Domain and hosting costs are independently supported by friendly and generous folks like yourself who are able to contribute whatever they can to support the site to remain advertisement and sponsorship free.</p>
+            <p>Thank you to all those who have contributed thus far! If you have found the subreddit and this calculator valuable and useful, please consider supporting the mission by fueling the caffeinated furnace with <a href="https://buymeacoffee.com/rswingtrading">more coffee!</a></p>
+        </section>               
+    </div>
+</body>
+</html>

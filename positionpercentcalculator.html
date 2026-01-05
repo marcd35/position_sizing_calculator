@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3DPW9XEWL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J3DPW9XEWL');
+    </script>
+    <meta property="og:title" content="Position Sizing Calculator: Position %">
+    <meta property="og:description" content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!">
+    <meta property="og:image" content="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg">
+    <meta property="og:url" content="https://www.positionsizingcalculator.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg">
+    <!-- Local -->
+    <title>Position Sizing Calculator: Position %</title>
+    <link rel="stylesheet" type="text/css" href="positionpercentcalculator.css">
+    <script src="positionpercentcalculator.js" defer></script>
+</head>
+
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <div class="header">
+            <a href="https://www.reddit.com/r/swingtrading/" target="_blank">
+            <img src="https://www.positionsizingcalculator.com/media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;">
+            </a>
+            <h1 class="title">Position Sizing Calculator</h1>
+        </div>
+
+        <hr>
+        
+        <!-- Begin Input Container -->
+        <div>
+            <h3>Method 3: Position Sizing Based on Position Percentage</h3>
+            Usage: Max Shares will be calculated based upon the percentage amount you are willing to allocate toward the trade, based on your account size or other value of your choosing.
+            <a href="calculatorinstructions.html" target="_blank">More Info</a>
+            <p>
+            
+            <div class="input-container container">
+                <div class="form-group">
+                    <label for="accountValue">Account Value / Allocation Amount
+                        <span class="info-icon">ⓘ
+                            <span class="info-tooltip">The total amount of capital you have in your trading account or amount you are willing to commit to the trade.</span>
+                        </span>
+                    </label>
+                    <input type="number" id="accountValue" min="0" step="1" value="10000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="riskPercentage">Position Risk %</label>
+                    <div class="slider-input-container">
+                        <input type="number" id="riskPercentage" name="riskPercentage" step="1" min="0" max="100" value="1" style="flex: 1;">
+                        <input type="range" id="riskPercentageSlider" min="0" max="100" step="1" value="1" style="flex: 1;">
+                    </div>
+                </div>
+
+                <div class="preset-buttons" style="display: flex; justify-content: center;">
+                    <button type="button" data-value="5">5%</button>
+                    <button type="button" data-value="10">10%</button>
+                    <button type="button" data-value="20">20%</button>
+                    <button type="button" data-value="25">25%</button>
+                    <button type="button" data-value="50">50%</button>
+                    <button type="button" data-value="75">75%</button>
+                    <button type="button" data-value="100">100%</button>
+                </div>
+
+                <p>
+
+                <div class="form-group" style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label for="entryPrice">Entry Price
+                            <span class="info-icon">ⓘ
+                                <span class="info-tooltip">The price at which you plan to enter the trade.</span>
+                            </span>
+                        </label>
+                        <input type="number" id="entryPrice" min="0" step="0.01" value="100" required>
+                    </div>
+                
+                    <div style="flex: 1;">
+                        <label for="stopLoss">Stop Loss
+                            <span class="info-icon">ⓘ
+                                <span class="info-tooltip">The price at which you plan to exit the trade if it goes against you.</span>
+                            </span>
+                        </label>
+                        <input type="number" id="stopLoss" min="0" step="0.01" value="90" required>
+                    </div>
+                </div>
+
+                <div class="form-group" s>
+                
+
+                    <div>
+                        <label for="tickerSymbol">Ticker Symbol (optional)
+                            <span class="info-icon">ⓘ
+                                <span class="info-tooltip">This field is for your own reference and does not affect calculations.</span>
+                            </span>
+                        </label>
+                        <input type="text" id="tickerSymbol">
+                    </div>
+                </div>
+
+                <!-- Calculate and Clear Buttons -->
+                <div class="button-group">
+                    <button id="calculateButton">Calculate</button>
+                    <button id="clearButton" style="background: red; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-left: 10px;">Clear</button>
+                </div>
+
+                <br><center>
+                    <div class="scrolldown">
+                        <a href="#disclaimer-info">Disclaimer</a> |
+                        <a href="#about-info">About</a> |
+                        <a href="#support-info">Support</a>
+                    </div>
+                </div>
+            </div>
+            <center>
+                <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="https://www.positionsizingcalculator.com/media/redditicon.jpg" style="width:25px;height:25px;"></a>
+                <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="https://www.positionsizingcalculator.com/media/discordicon.png" style="width:25px;height:25px;"></a>
+                
+                <div>
+                    <b>Other Calculators:</b>                  
+                    <a href="index.html">Total Account Risk %</a> |
+                    <a href="dollarcalculator.html">Dollar Amount Risk</a> |
+                    Position % Risk
+                </div>
+                </center> 
+            
+           
+
+        <!-- Results Section -->
+        <section id="result" class="results-section">
+            <h2>Position Sizing Calculations</h2>
+            <p style="color: blue; font-style: italic;">Click any blue result to copy to clipboard.</p>
+            <div class="position-indicator">Position Type: <span id="position-indicator">-</span></div>
+            <div class="result-item">Max Shares: <span id="max-shares" class="copyable">-</span></div>
+            <div class="result-item">Position Size: $<span id="position-size" class="copyable">-</span></div>
+            <div class="result-item">Risk per Share: $<span id="risk-per-share" class="copyable">-</span></div>
+            <div class="result-item">Trade Risk: <span id="percent-risked" class="copyable">-</span>%</div>
+            <div class="result-item">Dollars Risked: $<span id="dollars-risked" class="copyable">-</span></div>
+        </section>
+
+        <!-- History Section -->
+        <div id="recent-results">
+            <h3>History</h3>
+            <div id="results-container"></div>
+        </div>
+    
+
+    
+    
+    <!-- Instructions 
+     <p>
+        <section class="tutorial" id="tutorial-position"></section>
+    <h2>Calculation Method 2: Dollar Calculator</h2>
+    <p>Determine position size based on a fixed dollar risk amount.</p>
+    <ul>
+        <li><strong>Step 1:</strong> Input the maximum dollar amount you are willing to risk.</li>
+        <li><strong>Step 2:</strong> Specify entry and stop-loss prices.</li>
+        <li><strong>Step 3 (Optional):</strong> Enter your total account size to calculate the percentage of the position size relative to your account.</li>
+        <li><strong>Step 4:</strong> Click "Calculate" to see results.</li>
+    </ul>
+    <p><em>Example:</em> If you want to risk $100 on a trade, the calculator determines shares and position size based on your entry and stop-loss prices.</p>
+    <a href="#top">Back to top</a><p>
+    
+    </p></section>
+    
+    <p>
+    -->
+    
+    
+                <!-- Disclaimer Section -->
+                <section class="disclaimer" id="disclaimer-info">
+                    <h2>Disclaimer</h2>
+                    <p>This calculator is for educational purposes only and does not constitute financial advice. Trading involves risk, and you should consult with a qualified financial professional before making any trading decisions. By using this calculator, you acknowledge that you assume all responsibility for your trades and the results thereof.</p>
+                    
+                </section>
+                <!-- About Section -->
+                <section class="about" id="about-info">
+                    <h2>About</h2>
+                    <p>This calculator was developed and maintained by <a href="https://www.reddit.com/r/swingtrading/" target="_blank">reddit.com/r/swingtrading</a> moderator <a href="https://www.reddit.com/user/cheungster/">Cheungster</a> in collaboration with <a href="https://chatgpt.com/">ChatGPT</a>.</p>
+                    <p>At r/swingtrading, it has been my mission to provide evidence-based education and supporting an ongoing effort to empower traders in making smarter trading decisions by prioritizing <a href="https://www.investopedia.com/terms/r/riskmanagement.asp">risk management protocols</a>.</p>
+                    <p>Visit our subreddit! <a href="https://www.reddit.com/r/swingtrading/" target="_blank">r/swingtrading!</a></p>
+                    <p>Come chat in our <a href="https://discord.gg/yWFavAVQpm" target="_blank">Discord!</a></p>
+                    
+                </section>
+                <!-- Support Section -->                        
+                <section class="support" id="support-info">
+                    <h2>Support</h2>
+                    <p>Domain and hosting costs are independently supported by friendly and generous folks like yourself who are able to contribute whatever they can to support the site to remain advertisement and sponsorship free.</p>
+                    <p>Thank you to all those who have contributed thus far! If you have found the subreddit and this calculator valuable and useful, please consider supporting the mission by fueling the caffeinated furnace with <a href="https://buymeacoffee.com/rswingtrading">more coffee!</a></p>
+                    <a href="#top">Back to top</a><p>
+                </section>               
+            </div>
+        </div>
+    </body>
+    </html>
+ 
