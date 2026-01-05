@@ -5,9 +5,66 @@
     border-radius: 0 0 24px 24px !important;
     box-shadow: var(--box-shadow-medium) !important;
     margin-bottom: 32px !important;
-    padding: 16px 20px !important;
-    border: 1px solid var(--border-color) !important;
+    padding: 12px 16px !important; /* Reduced padding slightly */
+    border: 1px solid rgba(255, 255, 255, 0.6) !important; /* Thinner white border */
     border-top: none !important;
+    background: var(--surface-color) !important;
+}
+
+/* Header inner layout - flex with proper spacing */
+.site-header__inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: var(--gap-large) !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Logo and title styling - bigger */
+.site-brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-shrink: 0 !important;
+}
+
+.site-brand__text {
+    font-size: 1.25rem !important; /* Bigger title */
+    font-weight: var(--font-weight-bold) !important;
+}
+
+.site-brand__icon {
+    border-radius: 8px !important;
+}
+
+/* Desktop calculator navigation - show inline */
+.calculator-nav {
+    display: none !important;
+    gap: var(--gap-medium) !important;
+    align-items: center !important;
+    flex: 1 !important;
+    justify-content: center !important;
+    margin-left: var(--gap-large) !important;
+}
+
+@media (min-width: 720px) {
+    .calculator-nav {
+        display: flex !important;
+    }
+}
+
+/* Instructions link styling - part of actions group */
+.instructions-link {
+    margin-right: var(--gap-small) !important;
+    padding: 8px 12px !important;
+}
+
+/* Actions group - instructions + theme toggle */
+.site-header__actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--gap-small) !important;
+    flex-shrink: 0 !important;
 }
 
 /* Add padding to main content area */
@@ -115,7 +172,7 @@ html[data-theme="dark"] .site-theme-toggle::after {
     border-radius: 24px !important;
     position: relative;
     overflow: visible !important;
-    border: 4px solid transparent !important;
+    border: 2px solid transparent !important; /* Thinner blue border */
     background: linear-gradient(var(--surface-color), var(--surface-color)) padding-box,
                 linear-gradient(90deg, var(--primary-color), var(--accent-color)) border-box !important;
 }
@@ -197,20 +254,23 @@ button:hover {
     margin-bottom: 20px !important;
     background: var(--surface-hover) !important;
     transition: all var(--transition-standard) !important;
+    border-left: none !important; /* Override any previous border-left */
 }
 
 /* When position type is Long - Blue */
 .position-indicator[data-position="long"],
 .position-indicator:has(#position-indicator[data-position="long"]) {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)) !important;
-    border-color: var(--primary-color) !important;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.08)) !important;
+    border-color: #3b82f6 !important;
+    border-left: 4px solid #3b82f6 !important;
 }
 
 /* When position type is Short - Orange */
 .position-indicator[data-position="short"],
 .position-indicator:has(#position-indicator[data-position="short"]) {
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.05)) !important;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.08)) !important;
     border-color: #f97316 !important;
+    border-left: 4px solid #f97316 !important;
 }
 
 #position-indicator {
@@ -223,6 +283,8 @@ button:hover {
     font-size: 14px !important;
     transition: all var(--transition-standard) !important;
     margin-left: auto !important;
+    background: var(--surface-hover) !important;
+    color: var(--text-color) !important;
 }
 
 /* Long position - Blue with up arrow */
@@ -233,9 +295,10 @@ button:hover {
 }
 
 #position-indicator[data-position="long"]::before {
-    content: '▲';
-    font-size: 12px;
-    margin-right: 4px;
+    content: '▲' !important;
+    font-size: 12px !important;
+    margin-right: 4px !important;
+    color: white !important;
 }
 
 /* Short position - Orange with down arrow */
@@ -246,9 +309,10 @@ button:hover {
 }
 
 #position-indicator[data-position="short"]::before {
-    content: '▼';
-    font-size: 12px;
-    margin-right: 4px;
+    content: '▼' !important;
+    font-size: 12px !important;
+    margin-right: 4px !important;
+    color: white !important;
 }
 
 /* History cards with gradient accent */

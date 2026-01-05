@@ -215,7 +215,7 @@ h1, h2, h3 {
 /* Calculator layout helpers */
 .calculator-intro {
     margin-bottom: var(--section-spacing);
-    padding: 20px 0;
+    padding: 0 0 20px 0;
 }
 
 .calculator-intro > div {
@@ -254,6 +254,7 @@ h1, h2, h3 {
     border-radius: var(--border-radius);
     padding: 10px;
     margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .calculator-details > summary {
@@ -426,14 +427,11 @@ button:hover {
     cursor: pointer;
 }
 
-.preset-buttons button {
-    margin: 5px;
-    padding: 5px 10px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius-small);
-    cursor: pointer;
+.preset-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .preset-buttons button:hover {
@@ -566,14 +564,7 @@ button:hover {
     color: var(--primary-color);
 }
 
-.position-indicator {
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 16px;
-    padding: 12px 16px;
-    background: var(--surface-hover);
-    border-radius: var(--border-radius-small);
-    border-left: 4px solid var(--accent-color);
-}
+/* Position indicator styling moved to shared-modern.css */
 
 /* Copyable Elements */
 .copyable {
@@ -697,6 +688,7 @@ a:active {
 
 #riskPercentage {
     flex: 1;
+    margin-bottom: 0 !important;
 }
 
 #riskPercentageInput {
@@ -707,4 +699,15 @@ a:active {
 
 #riskPercentageValue {
     min-width: 40px;
+}
+
+/* Reduce button padding for preset buttons */
+.preset-buttons button {
+    margin: 0;
+    padding: 3px 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
 }

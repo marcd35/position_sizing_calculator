@@ -138,7 +138,8 @@ function dollarCalculator(options) {
     updateText('position-indicator', positionType);
     
     // Set data attribute for styling (long = blue, short = orange)
-    const positionValue = positionType.toLowerCase();
+    // Extract just "long" or "short" from "Long Position" or "Short Position"
+    const positionValue = positionType.toLowerCase().split(' ')[0];
     if (positionIndicatorSpan) {
         positionIndicatorSpan.setAttribute('data-position', positionValue);
     }

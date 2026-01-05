@@ -3,7 +3,7 @@
         { href: 'total-risk-calculator.html', label: 'Total Risk %' },
         { href: 'dollar-risk-calculator.html', label: 'Dollar Risk' },
         { href: 'position-percent-calculator.html', label: 'Position %' },
-        { href: 'calculatorinstructions.html', label: 'Instructions' },
+        { href: 'calculatorinstructions.html', label: 'FAQ' },
     ];
 
     function getCurrentFile() {
@@ -64,6 +64,22 @@
 
         var currentFile = getCurrentFile();
 
+        var calculatorLinks = NAV_LINKS.slice(0, 3).map(function (link) {
+            var isCurrent = link.href === currentFile;
+            return (
+                '<a class="site-nav__link calculator-link" href="' +
+                escapeText(link.href) +
+                '"' +
+                (isCurrent ? ' aria-current="page"' : '') +
+                '>' +
+                escapeText(link.label) +
+                '</a>'
+            );
+        }).join('');
+
+        var instructionsLink = NAV_LINKS[3]; // Instructions is the 4th item
+        var isInstructionsCurrent = instructionsLink.href === currentFile;
+
         var linksHtml = NAV_LINKS.map(function (link) {
             var isCurrent = link.href === currentFile;
             return (
@@ -83,21 +99,20 @@
             '<header class="site-header" role="banner">' +
             '  <div class="site-header__inner">' +
             '    <a class="site-brand" href="total-risk-calculator.html" aria-label="Position Sizing Calculator home">' +
-            '      <img class="site-brand__icon" src="public/media/rswingtrading_icon.jpg" alt="" width="28" height="28" />' +
+            '      <img class="site-brand__icon" src="public/media/rswingtrading_icon.jpg" alt="" width="32" height="32" />' +
             '      <span class="site-brand__text">Position Sizing Calculator</span>' +
             '    </a>' +
+            '    <div class="site-nav__desktop calculator-nav">' +
+                   calculatorLinks +
+            '    </div>' +
             '    <div class="site-header__actions">' +
+            '      <a class="site-nav__link instructions-link" href="' + escapeText(instructionsLink.href) + '"' + (isInstructionsCurrent ? ' aria-current="page"' : '') + '>' + escapeText(instructionsLink.label) + '</a>' +
             '      <button class="site-theme-toggle" type="button" data-theme-toggle aria-pressed="' +
             (currentTheme === 'dark' ? 'true' : 'false') +
             '" aria-label="Toggle dark mode"></button>' +
             '      <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>' +
             '    </div>' +
             '  </div>' +
-            '  <nav id="primary-nav" class="site-nav" aria-label="Primary" hidden>' +
-            '    <div class="site-nav__links">' +
-            linksHtml +
-            '    </div>' +
-            '  </nav>' +
             '</header>';
 
         var anchor = document.getElementById('aria-live');

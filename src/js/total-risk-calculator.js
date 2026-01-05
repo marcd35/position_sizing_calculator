@@ -140,10 +140,13 @@ function calculate(options) {
 
     // Determine if the position is Long or Short
     const positionIndicator = document.getElementById('position-indicator');
+    const positionIndicatorDiv = document.querySelector('.position-indicator');
     const positionType = determinePositionType(entryPrice, stopLoss);
     if (positionType === 'Invalid') {
         setResultsDisabled('result', true);
         updateText('position-indicator', 'Entry price and Stop are equal.');
+        if (positionIndicator) positionIndicator.removeAttribute('data-position');
+        if (positionIndicatorDiv) positionIndicatorDiv.removeAttribute('data-position');
         showFieldError('entryPrice', ERROR_MESSAGES.entryStopEqual);
         showFieldError('stopLoss', ERROR_MESSAGES.entryStopEqual);
         resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment']);
@@ -156,6 +159,15 @@ function calculate(options) {
 
     setResultsDisabled('result', false);
     updateText('position-indicator', positionType);
+
+    // Set data attribute for styling (long = blue, short = orange)
+    const positionValue = positionType.toLowerCase().split(' ')[0];
+    if (positionIndicator) {
+        positionIndicator.setAttribute('data-position', positionValue);
+    }
+    if (positionIndicatorDiv && positionIndicatorDiv !== positionIndicator) {
+        positionIndicatorDiv.setAttribute('data-position', positionValue);
+    }
 
     // Calculate core variables
     const riskPerShare = calculateRiskPerShare(entryPrice, stopLoss);
