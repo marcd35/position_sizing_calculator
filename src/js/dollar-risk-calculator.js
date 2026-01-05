@@ -201,6 +201,21 @@ function dollarCalculator(options) {
         addHistoryEntry('results-container', historyHTML);
     }
 
-    // Success notification
-    if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');
+    // Success notification and glow effect
+    if (!isAuto) {
+        if (typeof notify === 'function') notify('success','Calculation complete.');
+        triggerHistoryGlow();
+    }
+}
+
+function triggerHistoryGlow() {
+    const historyDetails = document.querySelector('#recent-results .calculator-details');
+    if (historyDetails) {
+        historyDetails.classList.remove('glow-effect');
+        void historyDetails.offsetWidth;
+        historyDetails.classList.add('glow-effect');
+        setTimeout(() => {
+            historyDetails.classList.remove('glow-effect');
+        }, 1000);
+    }
 }

@@ -257,6 +257,29 @@ function calculate(options) {
         addHistoryEntry('results-container', historyHTML);
     }
 
-    // Success notification
-    if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');
+    // Success notification and glow effect
+    if (!isAuto) {
+        if (typeof notify === 'function') notify('success','Calculation complete.');
+        triggerHistoryGlow();
+    }
+}
+
+function triggerHistoryGlow() {
+    const historyDetails = document.querySelector('#recent-results .calculator-details');
+    console.log('Triggering glow, element:', historyDetails);
+    if (historyDetails) {
+        // Remove the class if it exists to allow the animation to restart
+        historyDetails.classList.remove('glow-effect');
+        // Trigger reflow to restart animation
+        void historyDetails.offsetWidth;
+        // Add the glow effect class
+        historyDetails.classList.add('glow-effect');
+        console.log('Glow class added');
+        // Remove the class after animation completes
+        setTimeout(() => {
+            historyDetails.classList.remove('glow-effect');
+        }, 1000);
+    } else {
+        console.log('History details element not found');
+    }
 }

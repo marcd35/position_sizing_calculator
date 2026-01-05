@@ -72,3 +72,28 @@ html[data-theme="dark"] {
     --box-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
     --box-shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
 }
+
+html[data-theme="grayscale"] {
+    /* Grayscale Mode - Dark gray preference */
+    --background-color: #2a2a2a;
+    --text-color: #f0f0f0;
+    --text-secondary: #b8b8b8;
+    --light-bg: #1f1f1f;
+    --surface-color: #262626;
+    --border-color: #3a3a3a;
+    --input-border: #454545;
+    --primary-color: #7a7a7a;
+    --secondary-color: #6a6a6a;
+    --accent-color: #888888;
+
+    --surface-hover: #323232;
+    --surface-active: #3a3a3a;
+
+    --tooltip-bg: #1f1f1f;
+    --tooltip-text: #f0f0f0;
+    
+    /* Grayscale shadows */
+    --box-shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+    --box-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --box-shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+}

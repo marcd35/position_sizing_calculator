@@ -45,15 +45,17 @@
     }
 
     function applyTheme(theme) {
-        var safeTheme = theme === 'dark' ? 'dark' : 'light';
+        var validThemes = ['light', 'dark', 'grayscale'];
+        var safeTheme = validThemes.indexOf(theme) !== -1 ? theme : 'light';
         document.documentElement.setAttribute('data-theme', safeTheme);
         return safeTheme;
     }
 
     function initTheme() {
-        // Default: light
+        // Default: light, supports light/dark/grayscale
         var stored = getStoredTheme();
-        var theme = stored === 'dark' ? 'dark' : 'light';
+        var validThemes = ['light', 'dark', 'grayscale'];
+        var theme = validThemes.indexOf(stored) !== -1 ? stored : 'light';
         return applyTheme(theme);
     }
 
@@ -93,6 +95,20 @@
             );
         }).join('');
 
+        // Theme switcher segmented buttons
+        var themeSwitcherHtml = 
+            '<div class="theme-switcher" role="radiogroup" aria-label="Select theme">' +
+            '  <button type="button" role="radio" class="theme-switcher__btn" data-theme-value="light" ' +
+            '    aria-checked="' + (currentTheme === 'light' ? 'true' : 'false') + '" ' +
+            '    title="Light theme">☀️</button>' +
+            '  <button type="button" role="radio" class="theme-switcher__btn" data-theme-value="dark" ' +
+            '    aria-checked="' + (currentTheme === 'dark' ? 'true' : 'false') + '" ' +
+            '    title="Dark theme">🌙</button>' +
+            '  <button type="button" role="radio" class="theme-switcher__btn" data-theme-value="grayscale" ' +
+            '    aria-checked="' + (currentTheme === 'grayscale' ? 'true' : 'false') + '" ' +
+            '    title="Grayscale theme">⚙️</button>' +
+            '</div>';
+
         var themeButtonLabel = '';
 
         var headerHtml =
@@ -107,9 +123,7 @@
             '    </div>' +
             '    <div class="site-header__actions">' +
             '      <a class="site-nav__link instructions-link" href="' + escapeText(instructionsLink.href) + '"' + (isInstructionsCurrent ? ' aria-current="page"' : '') + '>' + escapeText(instructionsLink.label) + '</a>' +
-            '      <button class="site-theme-toggle" type="button" data-theme-toggle aria-pressed="' +
-            (currentTheme === 'dark' ? 'true' : 'false') +
-            '" aria-label="Toggle dark mode"></button>' +
+                   themeSwitcherHtml +
             '      <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>' +
             '    </div>' +
             '  </div>' +
@@ -124,7 +138,7 @@
 
         var toggle = document.querySelector('[data-nav-toggle]');
         var nav = document.getElementById('primary-nav');
-        var themeToggle = document.querySelector('[data-theme-toggle]');
+        var themeSwitcher = document.querySelector('.theme-switcher');
 
         function isDesktop() {
             return window.matchMedia && window.matchMedia('(min-width: 720px)').matches;
@@ -149,15 +163,20 @@
         // Default state
         setOpen(false);
 
-        if (themeToggle) {
-            themeToggle.addEventListener('click', function () {
-                var current = document.documentElement.getAttribute('data-theme');
-                var next = current === 'dark' ? 'light' : 'dark';
-                var applied = applyTheme(next);
-                setStoredTheme(applied);
+        // Theme switcher segmented button handlers
+        if (themeSwitcher) {
+            var themeButtons = themeSwitcher.querySelectorAll('.theme-switcher__btn');
+            themeButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var selectedTheme = btn.getAttribute('data-theme-value');
+                    var applied = applyTheme(selectedTheme);
+                    setStoredTheme(applied);
 
-                themeToggle.setAttribute('aria-pressed', applied === 'dark' ? 'true' : 'false');
-                // No text content needed - CSS handles the visual with emojis
+                    // Update aria-checked states for all buttons
+                    themeButtons.forEach(function (b) {
+                        b.setAttribute('aria-checked', b.getAttribute('data-theme-value') === applied ? 'true' : 'false');
+                    });
+                });
             });
         }
 
