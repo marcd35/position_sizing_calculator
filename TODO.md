@@ -104,9 +104,9 @@ Refactor position sizing calculator from basic HTML/CSS/JS to industry-standard 
    */
   ```
 
-- [ ] 5.2 Add JSDoc type annotations to calculator functions
-- [ ] 5.3 Add `// @ts-check` at top of JS files for VS Code type checking
-- [ ] 5.4 Create `types.js` with JSDoc typedef comments for complex objects:
+- [x] 5.2 Add JSDoc type annotations to calculator functions
+- [x] 5.3 Add `// @ts-check` at top of JS files for VS Code type checking
+- [x] 5.4 Create `types.js` with JSDoc typedef comments for complex objects:
   ```javascript
   /**
    * @typedef {Object} CalculationInput
@@ -135,7 +135,7 @@ Refactor position sizing calculator from basic HTML/CSS/JS to industry-standard 
   - Create `src/constants.js`
   - Define `RISK_MULTIPLES = { ONE_R: 1, TWO_R: 2, THREE_R: 3 }`
 
-- [ ] 6.4 Improve error messages:
+- [x] 6.4 Improve error messages:
   - Replace generic alerts with specific, helpful messages
   - Add field-level validation feedback
   - Focus first invalid field to guide corrections
@@ -159,7 +159,7 @@ Refactor position sizing calculator from basic HTML/CSS/JS to industry-standard 
 - [x] 7.1 Add `package.json` for dependency management
 - [x] 7.2 Add ESLint configuration for code quality
 - [x] 7.3 Add Prettier for consistent formatting
-- [ ] 7.4 Consider lightweight build tool (optional):
+- [ ] 7.4 Consider lightweight build tool (optional) — Skipped (keep simple, no bundler):
   - Vite for bundling
   - OR keep it simple with no build step
 
@@ -200,6 +200,13 @@ Refactor position sizing calculator from basic HTML/CSS/JS to industry-standard 
 
 ---
 
+## Skipped Decisions
+- Build tooling: Skip Vite or any bundler; keep static HTML/CSS/JS for simplicity.
+- TypeScript migration: Keep lightweight JSDoc with `@ts-check` rather than full TS.
+- Polyfills: Defer unless a specific browser compatibility issue is reported.
+
+---
+
 ## Current Status
 - [x] Phases 1–5 complete
 - [x] Phase 6 core: notifications, sanitization, constants, shortcuts, a11y
@@ -210,4 +217,6 @@ Refactor position sizing calculator from basic HTML/CSS/JS to industry-standard 
 - [ ] Future: refine error copy wording and microcopy tone
 
 ## Next Steps
-Start with Phase 1 to fix critical issues and establish foundation.
+- Refine error copy wording and microcopy tone
+- Optional: add browser compatibility polyfills if needed
+- Verify pages manually and push changes
