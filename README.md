@@ -57,9 +57,11 @@ For detailed instructions and examples, see the [FAQ page](https://www.positions
 
 ## About
 
-This calculator was developed and maintained by [r/swingtrading](https://www.reddit.com/r/swingtrading/) moderator [Cheungster](https://www.reddit.com/user/cheungster/) in collaboration with the trading community.
+This calculator was developed and maintained for the [r/swingtrading](https://www.reddit.com/r/swingtrading/) community by moderator [Cheungster](https://www.reddit.com/user/cheungster/).
 
 At r/swingtrading, the mission is to provide evidence-based education and empower traders to make smarter trading decisions by prioritizing [risk management protocols](https://www.investopedia.com/terms/r/riskmanagement.asp).
+
+View on GitHub: https://github.com/marcd35/position_sizing_calculator
 
 ### Community
 
