@@ -234,6 +234,7 @@ function calculate(options) {
         const safeTicker = escapeHTML(tickerSymbol);
         const historyHTML = `
             <div class="recent-result">
+                <strong>Timestamp:</strong> ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
                 <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
                 <strong>Total Account Risk:</strong> ${riskPercentage}%<br>
@@ -252,7 +253,6 @@ function calculate(options) {
                 <strong>3R:</strong> $${threeR.toFixed(2)}<br>
                 <strong>Max Positions:</strong> ${maxPositionsInput || 'N/A'}<br>
                 <strong>Position Allotment:</strong> ${positionAllotment !== "N/A" ? `$${positionAllotment.toFixed(4)}` : 'N/A'}<br>
-                <strong>Timestamp:</strong> ${timestamp}
             </div>`;
         addHistoryEntry('results-container', historyHTML);
     }
@@ -265,7 +265,7 @@ function calculate(options) {
 }
 
 function triggerHistoryGlow() {
-    const historyDetails = document.querySelector('#recent-results .calculator-details');
+    const historyDetails = document.getElementById('history-details');
     console.log('Triggering glow, element:', historyDetails);
     if (historyDetails) {
         // Remove the class if it exists to allow the animation to restart

@@ -184,6 +184,7 @@ function dollarCalculator(options) {
         const safeTicker = escapeHTML(tickerSymbol);
         const historyHTML = `
             <div class="recent-result">
+                strong>Timestamp:</strong> ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
                 <strong>Dollar Risk:</strong> $${dollarRisk.toFixed(2)}<br>
                 <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
@@ -196,7 +197,6 @@ function dollarCalculator(options) {
                 <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
                 <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
                 <strong>Position Size as % of Account:</strong> ${positionPercentAccount !== 'N/A' ? `${positionPercentAccount}%` : 'N/A'}<br>
-                <strong>Timestamp:</strong> ${timestamp}
             </div>`;
         addHistoryEntry('results-container', historyHTML);
     }
@@ -209,7 +209,7 @@ function dollarCalculator(options) {
 }
 
 function triggerHistoryGlow() {
-    const historyDetails = document.querySelector('#recent-results .calculator-details');
+    const historyDetails = document.getElementById('history-details');
     if (historyDetails) {
         historyDetails.classList.remove('glow-effect');
         void historyDetails.offsetWidth;
