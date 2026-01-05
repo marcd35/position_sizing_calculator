@@ -36,61 +36,199 @@
         </p>
 
         <div class="input-container">
-            <strong>Quick links</strong>
-            <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 10px;">
-                <a href="#method-total-risk">Method 1: Total Risk %</a>
-                <a href="#method-dollar-risk">Method 2: Dollar Risk</a>
-                <a href="#method-position-percent">Method 3: Position %</a>
-                <a href="#disclaimer">Disclaimer</a>
-                <a href="#about">About</a>
-                <a href="#support">Support</a>
+            <h3 style="color: var(--primary-color); margin-top: 0;">📋 Quick Navigation</h3>
+            <div class="quick-links">
+                <a href="#getting-started" class="quick-link">🚀 Getting Started</a>
+                <a href="#method-total-risk" class="quick-link">📊 Method 1: Total Risk %</a>
+                <a href="#method-dollar-risk" class="quick-link">💰 Method 2: Dollar Risk</a>
+                <a href="#method-position-percent" class="quick-link">📈 Method 3: Position %</a>
+                <a href="#interpreting-results" class="quick-link">🔍 Interpreting Results</a>
+                <a href="#disclaimer" class="quick-link">⚠️ Disclaimer</a>
+                <a href="#about" class="quick-link">ℹ️ About</a>
+                <a href="#support" class="quick-link">☕ Support</a>
             </div>
         </div>
 
-        <section id="method-total-risk">
-            <h2>Method 1: Total Account Risk %</h2>
-            <p>
-                Use this when you want to risk a fixed percentage of your account on a trade.
-                The calculator converts that risk into a maximum share count based on your stop loss.
-            </p>
-            <ol>
-                <li>Enter your <strong>Account Value</strong>.</li>
-                <li>Enter <strong>Total Account Risk %</strong> (e.g., 1%).</li>
-                <li>Enter <strong>Entry Price</strong> and <strong>Stop Loss</strong>.</li>
-                <li>Optional: set <strong>Max Positions</strong> to limit per-position allocation.</li>
-                <li>Click <strong>Calculate</strong>.</li>
-            </ol>
-            <p><a href="#top">Back to top</a></p>
+        <section id="getting-started" class="method-section method-section--intro">
+            <h2>🚀 Getting Started: Pick Your Method</h2>
+            <div class="highlight-box">
+                <p>
+                    All three calculators answer the same question: <strong>"How many shares should I buy?"</strong>
+                </p>
+                <p>
+                    The difference is HOW you want to define your risk:
+                </p>
+                <ul class="method-list">
+                    <li><span class="method-number">1</span> <strong>Total Risk %:</strong> "I risk a fixed % of my account per trade"</li>
+                    <li><span class="method-number">2</span> <strong>Dollar Risk:</strong> "I risk a fixed dollar amount per trade"</li>
+                    <li><span class="method-number">3</span> <strong>Position %:</strong> "I allocate a fixed % of my account to each position"</li>
+                </ul>
+                <div class="pro-tip">
+                    💡 <strong>Pro tip:</strong> Try all three with the same entry/stop prices to see how they differ!
+                </div>
+            </div>
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
         </section>
 
-        <section id="method-dollar-risk">
-            <h2>Method 2: Dollar Amount Risk</h2>
+        <section id="method-total-risk" class="method-section method-section--method1">
+            <h2>📊 Method 1: Total Account Risk %</h2>
+            
+            <h3 class="section-heading">When to Use This</h3>
             <p>
-                Use this when you prefer to define risk as a fixed dollar amount (e.g., “I’m willing to lose $100”).
-                The calculator finds max shares based on the difference between entry and stop.
+                Use this method if you prefer thinking about risk as a <strong>percentage of your total account</strong>.
+                For example: "I'm willing to risk 1% of my $10,000 account ($100) on this trade."
+            </p>
+
+            <h3>How It Works</h3>
+            <p>
+                This calculator:
             </p>
             <ol>
-                <li>Enter your <strong>Dollar Risk</strong>.</li>
-                <li>Enter <strong>Entry Price</strong> and <strong>Stop Loss</strong>.</li>
-                <li>Optional: enter <strong>Account Value</strong> to see position size as a percentage.</li>
-                <li>Click <strong>Calculate</strong>.</li>
+                <li>Takes your account value and the risk percentage you choose</li>
+                <li>Calculates how many dollars that represents as maximum risk</li>
+                <li>Uses your entry and stop loss prices to determine how many shares you can buy</li>
+                <li>Optionally limits your position size if you specify a max number of positions</li>
             </ol>
-            <p><a href="#top">Back to top</a></p>
+
+            <h3>Step-by-Step</h3>
+            <ol>
+                <li><strong>Account Value:</strong> Your total trading account balance</li>
+                <li><strong>Total Account Risk %:</strong> The percentage you're willing to risk (typically 0.5% - 2%)</li>
+                <li><strong>Entry Price:</strong> The price where you plan to buy</li>
+                <li><strong>Stop Loss:</strong> The price where you'll exit if the trade goes against you</li>
+                <li><strong>Max Positions (optional):</strong> If you want to limit how much of your account goes into any single trade</li>
+                <li>Click <strong>Submit</strong> to calculate</li>
+            </ol>
+
+            <h3>What You'll Get</h3>
+            <p>
+                <strong>Max Shares:</strong> How many shares you can safely buy<br>
+                <strong>Position Size:</strong> Total dollar amount invested<br>
+                <strong>Risk per Share:</strong> How much you lose per share if stopped out<br>
+                <strong>Dollars Risked:</strong> Total money at risk on this trade
+            </p>
+
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
         </section>
 
-        <section id="method-position-percent">
-            <h2>Method 3: Position % Allocation</h2>
+        <section id="method-dollar-risk" class="method-section method-section--method2">
+            <h2>💰 Method 2: Dollar Amount Risk</h2>
+
+            <h3 class="section-heading">When to Use This</h3>
             <p>
-                Use this when you want to size a trade based on allocating a percentage of capital to a position.
-                The calculator converts the allocation into max shares, and still shows risk-per-share.
+                Use this method if you think in terms of <strong>fixed dollar amounts</strong>.
+                For example: "I want to risk $100 maximum on this trade, no matter what."
+            </p>
+
+            <h3>How It Works</h3>
+            <p>
+                This calculator:
             </p>
             <ol>
-                <li>Enter your <strong>Account Value / Allocation Amount</strong>.</li>
-                <li>Enter <strong>Position Risk %</strong> (or use presets/slider).</li>
-                <li>Enter <strong>Entry Price</strong> and <strong>Stop Loss</strong>.</li>
-                <li>Click <strong>Calculate</strong>.</li>
+                <li>Takes the dollar amount you're willing to risk</li>
+                <li>Looks at the gap between your entry and stop loss prices</li>
+                <li>Calculates how many shares you can buy while staying within your dollar risk limit</li>
             </ol>
-            <p><a href="#top">Back to top</a></p>
+
+            <h3>Step-by-Step</h3>
+            <ol>
+                <li><strong>Dollar Risk:</strong> The maximum dollar amount you're willing to lose on this trade</li>
+                <li><strong>Entry Price:</strong> The price where you plan to buy</li>
+                <li><strong>Stop Loss:</strong> The price where you'll exit if the trade goes against you</li>
+                <li><strong>Account Value (optional):</strong> Your total account—helps see what percentage of your account this trade represents</li>
+                <li>Click <strong>Submit</strong> to calculate</li>
+            </ol>
+
+            <h3>What You'll Get</h3>
+            <p>
+                <strong>Max Shares:</strong> How many shares you can safely buy<br>
+                <strong>Position Size:</strong> Total dollar amount invested<br>
+                <strong>Risk per Share:</strong> How much you lose per share if stopped out<br>
+                <strong>Dollars Risked:</strong> Confirms your maximum risk amount<br>
+                <strong>Position Size as % of Account:</strong> Shows what percentage of your account this trade uses
+            </p>
+
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
+        </section>
+
+        <section id="method-position-percent" class="method-section method-section--method3">
+            <h2>📈 Method 3: Position % Allocation</h2>
+
+            <h3 class="section-heading">When to Use This</h3>
+            <p>
+                Use this method if you want to allocate a <strong>percentage of your capital to each trade</strong>.
+                For example: "I want to put 5% of my account into this position."
+            </p>
+
+            <h3>How It Works</h3>
+            <p>
+                This calculator:
+            </p>
+            <ol>
+                <li>Takes the account value (or allocation amount) and percentage you specify</li>
+                <li>Calculates how many dollars that percentage represents</li>
+                <li>Uses your entry and stop loss to determine how many shares you can buy with that allocation</li>
+                <li>Shows you how much risk you're taking per share</li>
+            </ol>
+
+            <h3>Step-by-Step</h3>
+            <ol>
+                <li><strong>Account Value / Allocation Amount:</strong> Your total account or the amount you want to allocate to this trade</li>
+                <li><strong>Position Risk %:</strong> The percentage of that amount to invest (use the quick preset buttons or adjust the slider)</li>
+                <li><strong>Entry Price:</strong> The price where you plan to buy</li>
+                <li><strong>Stop Loss:</strong> The price where you'll exit if the trade goes against you</li>
+                <li>Click <strong>Submit</strong> to calculate</li>
+            </ol>
+
+            <h3>What You'll Get</h3>
+            <p>
+                <strong>Max Shares:</strong> How many shares you can safely buy<br>
+                <strong>Position Size:</strong> Total dollar amount invested<br>
+                <strong>Risk per Share:</strong> How much you lose per share if stopped out<br>
+                <strong>Trade Risk:</strong> The actual percentage of your account at risk<br>
+                <strong>Dollars Risked:</strong> Total money at risk on this trade
+            </p>
+
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
+        </section>
+
+        <hr />
+
+        <section id="interpreting-results" class="method-section method-section--results">
+            <h2>🔍 Understanding Your Results</h2>
+
+            <h3 class="section-heading">Max Shares</h3>
+            <p>
+                The maximum number of shares you should buy. This is your position size limit.
+                <strong>Buy this many or fewer.</strong>
+            </p>
+
+            <h3>Position Size</h3>
+            <p>
+                The total dollar amount you'll invest if you buy the max shares at your entry price.
+                For example: 100 shares × $50 entry = $5,000 position size.
+            </p>
+
+            <h3>Risk per Share</h3>
+            <p>
+                How much money you lose on each share if stopped out.
+                Calculated as: Entry Price − Stop Loss = Risk per Share
+            </p>
+
+            <h3>Dollars Risked</h3>
+            <p>
+                Your maximum total loss if the trade hits your stop loss.
+                This is what you specified in Method 1 & 2, or what results from your allocation in Method 3.
+            </p>
+
+            <h3>History</h3>
+            <p>
+                Every time you click <strong>Submit</strong>, your calculation is saved in the History section.
+                This helps you review past trades and see your sizing decisions over time.
+                Click <strong>Clear</strong> to reset the calculator without saving to history.
+            </p>
+
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
         </section>
 
         <hr />
@@ -127,7 +265,7 @@
             <p>
                 <a href="https://buymeacoffee.com/rswingtrading" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
             </p>
-            <p><a href="#top">Back to top</a></p>
+            <p><a href="#top" class="back-to-top">↑ Back to top</a></p>
         </section>
     </div>
 </body>
