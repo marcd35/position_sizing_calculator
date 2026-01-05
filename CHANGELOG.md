@@ -126,7 +126,7 @@ This project follows [Semantic Versioning](https://semver.org/):
 ## Links
 
 - [Repository](https://github.com/marcd35/position_sizing_calculator)
-- [Live Site](https://www.positionsizingcalculator.com)
+- [Live Site](https://marcd35.github.io/position_sizing_calculator/)
 - [r/swingtrading Community](https://www.reddit.com/r/swingtrading/)
 - [Discord](https://discord.gg/yWFavAVQpm)
 - [Support](https://buymeacoffee.com/rswingtrading)

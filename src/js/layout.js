@@ -122,7 +122,7 @@
     var headerHtml =
       '<header class="site-header" role="banner">' +
       '  <div class="site-header__inner">' +
-      '    <a class="site-brand" href="total-risk-calculator.html" aria-label="Position Sizing Calculator home">' +
+      '    <a class="site-brand" href="https://marcd35.github.io/position_sizing_calculator/" aria-label="Position Sizing Calculator home">' +
       '      <img class="site-brand__icon" src="public/media/rswingtrading_icon.jpg" alt="" width="32" height="32" />' +
       '      <span class="site-brand__text">Position Sizing Calculator</span>' +
       '    </a>' +

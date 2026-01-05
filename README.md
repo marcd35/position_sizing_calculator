@@ -2,7 +2,7 @@
 
 A suite of three position sizing calculators designed for swing traders to manage risk and optimize trade sizing. Calculate your position sizes with confidence using professional risk management tools.
 
-🔗 **[Launch Calculator](https://www.positionsizingcalculator.com)** | 📖 **[View Instructions](https://www.positionsizingcalculator.com/calculatorinstructions.html)**
+🔗 **[Launch Calculator](https://marcd35.github.io/position_sizing_calculator/)** | 📖 **[View Instructions](https://marcd35.github.io/position_sizing_calculator/calculatorinstructions.html)**
 
 ## What This Tool Does
 
@@ -29,12 +29,12 @@ All three methods help you size positions properly based on your entry price and
 
 ## Quick Start
 
-1. Visit [positionsizingcalculator.com](https://www.positionsizingcalculator.com)
+1. Visit [marcd35.github.io/position_sizing_calculator](https://marcd35.github.io/position_sizing_calculator/)
 2. Choose your preferred method (Total Risk %, Dollar Risk, or Position %)
 3. Enter your account value, risk tolerance, entry price, and stop loss
 4. Your results appear automatically
 
-For detailed instructions and examples, see the [FAQ page](https://www.positionsizingcalculator.com/calculatorinstructions.html).
+For detailed instructions and examples, see the [FAQ page](https://marcd35.github.io/position_sizing_calculator/calculatorinstructions.html).
 
 ## Example Use Case
 
