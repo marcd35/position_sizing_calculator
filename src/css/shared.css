@@ -557,6 +557,28 @@ button:hover {
     margin-top: 20px;
 }
 
+/* Split layout: Submit left, Clear right */
+.button-group--split {
+    justify-content: space-between;
+}
+
+/* Primary button style - squircle with gradient */
+.btn--primary {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-standard);
+}
+
+.btn--primary:hover {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+}
+
 /* Input Container - fix clipping */
 .input-container {
     background: var(--light-bg);

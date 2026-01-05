@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const clearButton = document.getElementById('clearButton');
+    const submitButton = document.getElementById('submitButton');
+
+    // Event listener for the Submit button
+    if (submitButton) {
+        submitButton.addEventListener('click', () => {
+            dollarCalculator({ source: 'manual' });
+        });
+    }
 
     // Event listener for the Clear button
     if (clearButton) {
@@ -166,29 +174,32 @@ function dollarCalculator(options) {
     updateText('dollars-risked-dollar', formatCurrency(dollarsRisked));
     updateText('position-percent-account', positionPercentAccount);
 
-    // Update history
+    // Update history (only on manual submit)
     const timestamp = new Date().toLocaleString();
     const ariaLive = document.getElementById('aria-live');
     if (ariaLive && !isAuto) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
-    const resultContainer = document.getElementById('results-container');
-    const safeTicker = escapeHTML(tickerSymbol);
-    const historyHTML = `
-        <div class="recent-result">
-            <strong>Ticker Symbol:</strong> ${safeTicker}<br>
-            <strong>Dollar Risk:</strong> $${dollarRisk.toFixed(2)}<br>
-            <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
-            <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
-            <strong>Account Size:</strong> ${!isNaN(accountSize) && accountSize > 0 ? `$${accountSize.toFixed(2)}` : 'N/A'}<br>
-            <strong>Position Type:</strong> ${positionType}<br><br>
-            <strong>Result:</strong><br>
-            <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
-            <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
-            <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
-            <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
-            <strong>Position Size as % of Account:</strong> ${positionPercentAccount !== 'N/A' ? `${positionPercentAccount}%` : 'N/A'}<br>
-            <strong>Timestamp:</strong> ${timestamp}
-        </div>`;
-    addHistoryEntry('results-container', historyHTML);
+    
+    if (!isAuto) {
+        const resultContainer = document.getElementById('results-container');
+        const safeTicker = escapeHTML(tickerSymbol);
+        const historyHTML = `
+            <div class="recent-result">
+                <strong>Ticker Symbol:</strong> ${safeTicker}<br>
+                <strong>Dollar Risk:</strong> $${dollarRisk.toFixed(2)}<br>
+                <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
+                <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
+                <strong>Account Size:</strong> ${!isNaN(accountSize) && accountSize > 0 ? `$${accountSize.toFixed(2)}` : 'N/A'}<br>
+                <strong>Position Type:</strong> ${positionType}<br><br>
+                <strong>Result:</strong><br>
+                <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
+                <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
+                <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
+                <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
+                <strong>Position Size as % of Account:</strong> ${positionPercentAccount !== 'N/A' ? `${positionPercentAccount}%` : 'N/A'}<br>
+                <strong>Timestamp:</strong> ${timestamp}
+            </div>`;
+        addHistoryEntry('results-container', historyHTML);
+    }
 
     // Success notification
     if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');

@@ -56,6 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Submit button
+    const submitButton = document.getElementById('submitButton');
+    if (submitButton) {
+        submitButton.addEventListener('click', () => {
+            calculate({ source: 'manual' });
+        });
+    }
+
     // Clear field-level errors on input
     ['accountValue','riskPercentage','entryPrice','stopLoss'].forEach((id) => {
         const el = document.getElementById(id);
@@ -217,29 +225,32 @@ function calculate(options) {
     updateText('percent-risked', formatPercentage(percentRisked));
     updateText('dollars-risked', formatCurrency(dollarsRisked));
 
-    // Update history
+    // Update history (only on manual submit)
     const timestamp = new Date().toLocaleString();
     const ariaLive = document.getElementById('aria-live');
     if (ariaLive && !isAuto) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
-    const resultContainer = document.getElementById('results-container');
-    const safeTicker = escapeHTML(tickerSymbol);
-    const historyHTML = `
-        <div class="recent-result">
-            <strong>Ticker Symbol:</strong> ${safeTicker}<br>
-            <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
-            <strong>Position Risk %:</strong> ${riskPercentage}%<br>
-            <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
-            <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
-            <strong>Position Type:</strong> ${positionType}<br><br>
-            <strong>Result:</strong><br>
-            <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
-            <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
-            <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
-            <strong>Trade Risk:</strong> ${percentRisked.toFixed(2)}%<br>
-            <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
-            <strong>Timestamp:</strong> ${timestamp}
-        </div>`;
-    addHistoryEntry('results-container', historyHTML);
+    
+    if (!isAuto) {
+        const resultContainer = document.getElementById('results-container');
+        const safeTicker = escapeHTML(tickerSymbol);
+        const historyHTML = `
+            <div class="recent-result">
+                <strong>Ticker Symbol:</strong> ${safeTicker}<br>
+                <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
+                <strong>Position Risk %:</strong> ${riskPercentage}%<br>
+                <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
+                <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
+                <strong>Position Type:</strong> ${positionType}<br><br>
+                <strong>Result:</strong><br>
+                <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
+                <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
+                <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
+                <strong>Trade Risk:</strong> ${percentRisked.toFixed(2)}%<br>
+                <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
+                <strong>Timestamp:</strong> ${timestamp}
+            </div>`;
+        addHistoryEntry('results-container', historyHTML);
+    }
 
     // Success notification
     if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');
