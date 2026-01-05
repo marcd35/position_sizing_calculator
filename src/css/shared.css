@@ -94,10 +94,11 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    background: var(--border-color);
-    border-radius: 50px;
-    padding: 3px;
-}
+    background: #ffffff;
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    padding: 5px;
+}   
 
 .theme-switcher__btn {
     display: flex;
@@ -105,8 +106,8 @@ body {
     justify-content: center;
     width: 32px;
     height: 28px;
-    border: none;
-    background: transparent;
+    border: 1px solid #3a3a3a;
+    background: #ffffff;
     border-radius: 50px;
     font-size: 14px;
     cursor: pointer;
@@ -130,7 +131,17 @@ body {
 }
 
 /* Dark theme adjustments for theme switcher */
+
+html[data-theme="grayscale"] {
+    filter: grayscale(1);
+}
+
 html[data-theme="dark"] .theme-switcher {
+    background: var(--surface-color);
+    border: 1px solid #b8b8b8;
+}
+
+html[data-theme="dark"] .theme-switcher__btn {
     background: var(--surface-color);
 }
 
@@ -140,12 +151,16 @@ html[data-theme="dark"] .theme-switcher__btn[aria-checked="true"] {
 
 /* Grayscale theme adjustments for theme switcher */
 html[data-theme="grayscale"] .theme-switcher {
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
+    background: #6a6a6a;
+    border: 1px solid #f0f0f0;
+}
+
+html[data-theme="grayscale"] .theme-switcher__btn {
+    background: #3a3a3a;
 }
 
 html[data-theme="grayscale"] .theme-switcher__btn[aria-checked="true"] {
-    background: var(--primary-color);
+    background: #6a6a6a;
 }
 
 html[data-theme="grayscale"] .theme-switcher__btn:hover {
@@ -285,46 +300,77 @@ html[data-theme="grayscale"] .site-nav__link[aria-current="page"] {
     padding: 8px 12px;
 }
 
-@media (min-width: 720px) {
+/* Mobile-specific styles */
+.desktop-only {
+    display: none;
+}
+
+/* Mobile theme switcher container */
+.mobile-theme-switcher {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 8px;
+}
+
+.theme-switcher-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Small screen adjustments */
+@media (max-width: 430px) {
+    .site-header {
+        padding: 8px 12px;
+    }
+
+    .site-header__inner {
+        padding: 6px 8px;
+        gap: var(--gap-small);
+    }
+
+    .site-brand {
+        gap: 8px;
+    }
+
+    .site-brand__icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .site-brand__text {
+        font-size: 1rem;
+    }
+
+    .site-nav__toggle {
+        padding: 6px 12px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 1024px) {
     .site-nav__toggle {
         display: none;
     }
 
+    .desktop-only {
+        display: flex;
+    }
+
+    .mobile-theme-switcher {
+        display: none;
+    }
+
+    /* Hide mobile navigation on desktop */
+    #primary-nav {
+        display: none !important;
+    }
+
     .site-header__inner {
         padding-bottom: 8px;
-    }
-
-    .site-nav {
-        padding: 0 12px 10px;
-    }
-
-    .site-nav__links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--gap-medium);
-    }
-
-    .site-nav__link {
-        padding: 8px 10px;
-        background: transparent;
-        border: 1px solid transparent;
-        border-radius: 50px;
-    }
-
-    .site-nav__link:hover {
-        background: var(--light-bg);
-        border-color: var(--border-color);
-    }
-
-    .site-nav__link[aria-current="page"] {
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        color: white;
-        border-color: transparent;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-
-    .site-nav[hidden] {
-        display: block;
     }
 
     .calculator-nav {
@@ -335,7 +381,7 @@ html[data-theme="grayscale"] .site-nav__link[aria-current="page"] {
 /* Compact shared footer */
 .site-footer {
     margin: 16px 0 0;
-    padding: 16px 12px;
+    padding: 16px;
     background: var(--surface-color);
     border-top: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -681,7 +727,7 @@ button:hover {
 
 /* Primary button style - squircle with gradient */
 .btn--primary {
-    background: rgba(25, 164, 83, 0.4);
+    background: rgba(0, 167, 56, 0.8);
     /* background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); */
     color: rgba(255, 255, 255, 0.8);
     border: 1px solid transparent;
@@ -700,6 +746,18 @@ button:hover {
     /* transform: translateY(-1px); */
 }
 
+/* Grayscale theme - Submit Button (Submit   button) */
+html[data-theme="grayscale"] .btn--primary {
+    background: #7a7a7a;
+    border-color: #888888;
+    color: #ffffff;
+}
+
+html[data-theme="grayscale"] .btn--primary:hover {
+    background: rgba(136, 136, 136, 0.15);
+    box-shadow: 0 4px 12px rgba(136, 136, 136, 0.2);
+}
+
 /* Instructions page specific styles */
 .quick-links {
     display: flex;
@@ -709,17 +767,23 @@ button:hover {
 
 .quick-link {
     display: block;
-    padding: 8px 12px;
+    padding: 10px 14px;
+    background: var(--light-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--primary-color);
+    font-weight: var(--font-weight-medium);
     transition: all var(--transition-standard);
+    box-shadow: var(--box-shadow-light);
 }
 
 .quick-link:hover {
-    border-color: var(--border-color);
+    background: var(--surface-hover);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
     transform: translateX(4px);
+    box-shadow: var(--box-shadow-medium);
 }
 
 .method-section {
@@ -727,26 +791,29 @@ button:hover {
     padding: 24px;
     border-radius: 12px;
     border-left: 4px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .method-section--intro {
-    border-left-color: var(--border-color);
+    border-color: var(--accent-intro);
 }
 
 .method-section--method1 {
-    border-left-color: var(--border-color);
+    border-left-color: var(--accent-method1);
 }
 
 .method-section--method2 {
-    border-left-color: var(--border-color);
+    border-left-color: var(--accent-method2);
 }
 
 .method-section--method3 {
-    border-left-color: var(--border-color);
+    border-left-color: var(--accent-method3);
 }
 
 .method-section--results {
-    border-left-color: var(--border-color);
+    border-left-color: var(--accent-results);
 }
 
 .section-heading {

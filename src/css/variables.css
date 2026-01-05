@@ -21,6 +21,13 @@
     --tooltip-bg: #1e293b;
     --tooltip-text: #f8fafc;
     
+    /* Method Section Accent Colors */
+    --accent-intro: #06b6d4;
+    --accent-method1: #8b5cf6;
+    --accent-method2: #f59e0b;
+    --accent-method3: #10b981;
+    --accent-results: #ec4899;
+    
     /* Spacing */
     --border-radius: 12px;
     --border-radius-small: 6px;
@@ -71,6 +78,13 @@ html[data-theme="dark"] {
     --box-shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
     --box-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
     --box-shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+    
+    /* Method Section Accent Colors - Same as light mode */
+    --accent-intro: #06b6d4;
+    --accent-method1: #8b5cf6;
+    --accent-method2: #f59e0b;
+    --accent-method3: #10b981;
+    --accent-results: #ec4899;
 }
 
 html[data-theme="grayscale"] {
@@ -96,4 +110,11 @@ html[data-theme="grayscale"] {
     --box-shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
     --box-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
     --box-shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+    
+    /* Method Section Accent Colors - Grayscale (no color) */
+    --accent-intro: #6a6a6a;
+    --accent-method1: #6a6a6a;
+    --accent-method2: #6a6a6a;
+    --accent-method3: #6a6a6a;
+    --accent-results: #6a6a6a;
 }

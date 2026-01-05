@@ -122,11 +122,20 @@
                    calculatorLinks +
             '    </div>' +
             '    <div class="site-header__actions">' +
-            '      <a class="site-nav__link instructions-link" href="' + escapeText(instructionsLink.href) + '"' + (isInstructionsCurrent ? ' aria-current="page"' : '') + '>' + escapeText(instructionsLink.label) + '</a>' +
-                   themeSwitcherHtml +
+            '      <a class="site-nav__link instructions-link desktop-only" href="' + escapeText(instructionsLink.href) + '"' + (isInstructionsCurrent ? ' aria-current="page"' : '') + '>' + escapeText(instructionsLink.label) + '</a>' +
+            '      <div class="theme-switcher-desktop desktop-only">' + themeSwitcherHtml + '</div>' +
             '      <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>' +
             '    </div>' +
             '  </div>' +
+            '  <nav id="primary-nav" class="site-nav" hidden>' +
+            '    <div class="site-nav__links">' +
+                   linksHtml +
+            '      <div class="mobile-theme-switcher">' +
+            '        <div class="theme-switcher-label">Theme</div>' +
+                     themeSwitcherHtml +
+            '      </div>' +
+            '    </div>' +
+            '  </nav>' +
             '</header>';
 
         var anchor = document.getElementById('aria-live');
@@ -138,10 +147,10 @@
 
         var toggle = document.querySelector('[data-nav-toggle]');
         var nav = document.getElementById('primary-nav');
-        var themeSwitcher = document.querySelector('.theme-switcher');
+        var themeSwitchers = document.querySelectorAll('.theme-switcher');
 
         function isDesktop() {
-            return window.matchMedia && window.matchMedia('(min-width: 720px)').matches;
+            return window.matchMedia && window.matchMedia('(min-width: 1024px)').matches;
         }
 
         function setOpen(isOpen) {
@@ -163,8 +172,8 @@
         // Default state
         setOpen(false);
 
-        // Theme switcher segmented button handlers
-        if (themeSwitcher) {
+        // Theme switcher segmented button handlers - works for both desktop and mobile
+        themeSwitchers.forEach(function (themeSwitcher) {
             var themeButtons = themeSwitcher.querySelectorAll('.theme-switcher__btn');
             themeButtons.forEach(function (btn) {
                 btn.addEventListener('click', function () {
@@ -172,13 +181,15 @@
                     var applied = applyTheme(selectedTheme);
                     setStoredTheme(applied);
 
-                    // Update aria-checked states for all buttons
-                    themeButtons.forEach(function (b) {
-                        b.setAttribute('aria-checked', b.getAttribute('data-theme-value') === applied ? 'true' : 'false');
+                    // Update aria-checked states for all buttons in all theme switchers
+                    themeSwitchers.forEach(function (ts) {
+                        ts.querySelectorAll('.theme-switcher__btn').forEach(function (b) {
+                            b.setAttribute('aria-checked', b.getAttribute('data-theme-value') === applied ? 'true' : 'false');
+                        });
                     });
                 });
             });
-        }
+        });
 
         if (toggle) {
             toggle.addEventListener('click', function () {
