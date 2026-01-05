@@ -1,27 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3DPW9XEWL"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-J3DPW9XEWL');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-J3DPW9XEWL');
     </script>
-    <meta property="og:title" content="Position Sizing Calculator: Total Account Risk %">
-    <meta property="og:description" content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!">
-    <meta property="og:image" content="public/media/rswingtrading_icon.jpg">
-    <meta property="og:url" content="https://www.positionsizingcalculator.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="public/media/rswingtrading_icon.jpg">
+    <meta property="og:title" content="Position Sizing Calculator: Total Account Risk %" />
+    <meta
+      property="og:description"
+      content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!"
+    />
+    <meta property="og:image" content="public/media/rswingtrading_icon.jpg" />
+    <meta property="og:url" content="https://www.positionsizingcalculator.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="public/media/rswingtrading_icon.jpg" />
     <!-- Local -->
     <title>Position Sizing Calculator: Total Account Risk</title>
-    <link rel="stylesheet" type="text/css" href="src/css/variables.css">
-    <link rel="stylesheet" type="text/css" href="src/css/shared.css">
+    <link rel="stylesheet" type="text/css" href="src/css/variables.css" />
+    <link rel="stylesheet" type="text/css" href="src/css/shared.css" />
     <!-- Utilities -->
     <script src="src/constants.js" defer></script>
     <script src="src/utils/validators.js" defer></script>
@@ -34,161 +39,223 @@
     <script src="src/js/layout.js" defer></script>
     <!-- Page Script -->
     <script src="src/js/total-risk-calculator.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Screen reader live region -->
-    <div id="aria-live" aria-live="polite" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Results will be announced here.</div>
+    <div
+      id="aria-live"
+      aria-live="polite"
+      style="
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "
+    >
+      Results will be announced here.
+    </div>
     <!-- Main Container -->
     <section id="top"></section>
     <div class="container">
-        <div class="calculator-intro">
-            <h1 class="title">Method 1: Total Account Risk Percentage</h1>
-            <div>
-                Usage: Determine position size based on the <b>percentage of your account</b> you want to risk.
-                <a href="calculatorinstructions.html#method-total-risk">More Info</a>
-            </div>
+      <div class="calculator-intro">
+        <h1 class="title">Method 1: Total Account Risk Percentage</h1>
+        <div>
+          Usage: Determine position size based on the <b>percentage of your account</b> you want to
+          risk.
+          <a href="calculatorinstructions.html#method-total-risk">More Info</a>
         </div>
+      </div>
 
-        <div class="calculator-grid">
-            <section class="calculator-inputs" aria-label="Inputs">
-                <div class="input-container">        
-        <div class="form-group">
-            <label for="accountValue">Account Value 
-                <span class="info-icon">ⓘ
-                    <span class="info-tooltip">The total amount of capital you have in your trading account. This is used to calculate the maximum risk and position allotment.</span>
+      <div class="calculator-grid">
+        <section class="calculator-inputs" aria-label="Inputs">
+          <div class="input-container">
+            <div class="form-group">
+              <label for="accountValue"
+                >Account Value
+                <span class="info-icon"
+                  >ⓘ
+                  <span class="info-tooltip"
+                    >The total amount of capital you have in your trading account. This is used to
+                    calculate the maximum risk and position allotment.</span
+                  >
                 </span>
-            </label>
-            <input type="number" id="accountValue" min="0" step="0.01" value="10000" placeholder="e.g., 10000" required>
-        </div>
-
-        <div class="form-group" style="display: flex; gap: 15px;">
-            <div style="flex: 1;">
-                <label>Entry Price 
-                    <span class="info-icon">ⓘ
-                        <span class="info-tooltip">The price at which you plan to enter the trade.
-                        </span>
-                </label>
-                <input type="number" id="entryPrice" min="0" step="0.01" value="100" placeholder="e.g., 100.50" required>
+              </label>
+              <input
+                type="number"
+                id="accountValue"
+                min="0"
+                step="0.01"
+                value="10000"
+                placeholder="e.g., 10000"
+                required
+              />
             </div>
 
-            <div style="flex: 1;">
-                <label>Stop Loss 
-                    <span class="info-icon">ⓘ
-                        <span class="info-tooltip">The price at which you plan to exit the trade if it goes against you.
-                        </span>
+            <div class="form-group" style="display: flex; gap: 15px">
+              <div style="flex: 1">
+                <label
+                  >Entry Price
+                  <span class="info-icon"
+                    >ⓘ
+                    <span class="info-tooltip"
+                      >The price at which you plan to enter the trade.
                     </span>
+                  </span>
                 </label>
-                
-                <input type="number" id="stopLoss" min="0" step="0.01" value="90" placeholder="e.g., 95.00" required>
-            </div>
-        </div>
+                <input
+                  type="number"
+                  id="entryPrice"
+                  min="0"
+                  step="0.01"
+                  value="100"
+                  placeholder="e.g., 100.50"
+                  required
+                />
+              </div>
 
-        <div class="form-group">
-            <label for="riskPercentage">Total Account Risk %
-                <span class="info-icon">ⓘ
-                    <span class="info-tooltip">
-                        The percentage of your total account value you are willing to risk on a single trade. This is used to calculate the maximum risk.
+              <div style="flex: 1">
+                <label
+                  >Stop Loss
+                  <span class="info-icon"
+                    >ⓘ
+                    <span class="info-tooltip"
+                      >The price at which you plan to exit the trade if it goes against you.
                     </span>
+                  </span>
+                </label>
+
+                <input
+                  type="number"
+                  id="stopLoss"
+                  min="0"
+                  step="0.01"
+                  value="90"
+                  placeholder="e.g., 95.00"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="riskPercentage"
+                >Total Account Risk %
+                <span class="info-icon"
+                  >ⓘ
+                  <span class="info-tooltip">
+                    The percentage of your total account value you are willing to risk on a single
+                    trade. This is used to calculate the maximum risk.
+                  </span>
                 </span>
-            </label>
-            <input type="number" id="riskPercentage" name="riskPercentage" step="0.1" min="0" max="100" value="1" placeholder="0–100">
-        </div>
-        
-        <div class="preset-buttons">
-            <button type="button" onclick="setRisk(0.5)">0.5%</button>
-            <button type="button" onclick="setRisk(1)">1%</button>
-            <button type="button" onclick="setRisk(1.5)">1.5%</button>
-            <button type="button" onclick="setRisk(2)">2%</button>
-        </div>
+              </label>
+              <input
+                type="number"
+                id="riskPercentage"
+                name="riskPercentage"
+                step="0.1"
+                min="0"
+                max="100"
+                value="1"
+                placeholder="0–100"
+              />
+            </div>
 
-        <details class="calculator-details">
-            <summary>Advanced (optional)</summary>
-            <div class="calculator-details__content">
-                <div class="form-group" style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        <label>Max Positions (optional) 
-                            <span class="info-icon">ⓘ
-                                <span class="info-tooltip">The maximum number of positions you want to hold in your account.
-                                </span>
-                            </span>
-                        </label>
-                        <input type="number" id="maxPositions" min="1" placeholder="e.g., 10">
-                    </div>
+            <div class="preset-buttons">
+              <button type="button" onclick="setRisk(0.5)">0.5%</button>
+              <button type="button" onclick="setRisk(1)">1%</button>
+              <button type="button" onclick="setRisk(1.5)">1.5%</button>
+              <button type="button" onclick="setRisk(2)">2%</button>
+            </div>
 
-                    <div style="flex: 1;">
-                        <label>Ticker Symbol (optional) 
-                            <span class="info-icon">ⓘ
-                                <span class="info-tooltip">This field is for your own reference and does not affect calculations.
-                                </span>
-                            </span>
-                        </label>
-                        <input type="text" id="tickerSymbol" placeholder="e.g., AAPL">
-                    </div>
+            <details class="calculator-details">
+              <summary>Advanced (optional)</summary>
+              <div class="calculator-details__content">
+                <div class="form-group" style="display: flex; gap: 15px">
+                  <div style="flex: 1">
+                    <label
+                      >Max Positions (optional)
+                      <span class="info-icon"
+                        >ⓘ
+                        <span class="info-tooltip"
+                          >The maximum number of positions you want to hold in your account.
+                        </span>
+                      </span>
+                    </label>
+                    <input type="number" id="maxPositions" min="1" placeholder="e.g., 10" />
+                  </div>
+
+                  <div style="flex: 1">
+                    <label
+                      >Ticker Symbol (optional)
+                      <span class="info-icon"
+                        >ⓘ
+                        <span class="info-tooltip"
+                          >This field is for your own reference and does not affect calculations.
+                        </span>
+                      </span>
+                    </label>
+                    <input type="text" id="tickerSymbol" placeholder="e.g., AAPL" />
+                  </div>
                 </div>
+              </div>
+            </details>
+
+            <!-- Submit and Clear Buttons -->
+            <div class="button-group button-group--split">
+              <button id="submitButton" class="btn btn--primary">Submit</button>
+              <button id="clearButton" class="btn btn--danger">Clear</button>
             </div>
-        </details>
+          </div>
+        </section>
 
-        <!-- Submit and Clear Buttons -->
-        <div class="button-group button-group--split">
-            <button id="submitButton" class="btn btn--primary">Submit</button>
-            <button id="clearButton" class="btn btn--danger">Clear</button>
-        </div>
-
-                </div>
-            </section>
-
-            <section class="calculator-results" aria-label="Results">
-                <!-- Results -->
-                <section id="result" class="results-section">
-                    <h2>Results</h2>
-                    <p class="results-help">Tap/click a result to copy.</p>
-                    <div class="position-indicator">Position Type: <span id="position-indicator">-</span></div>
+        <section class="calculator-results" aria-label="Results">
+          <!-- Results -->
+          <section id="result" class="results-section">
+            <h2>Results</h2>
+            <p class="results-help">Tap/click a result to copy.</p>
+            <div class="position-indicator">
+              Position Type: <span id="position-indicator">-</span>
+            </div>
 
             <div class="result-item">
-                Max Shares: <span id="max-shares" class="copyable">-</span>
+              Max Shares: <span id="max-shares" class="copyable">-</span>
             </div>
             <div class="result-item">
-                Position Size: $<span id="position-size" class="copyable">-</span>
+              Position Size: $<span id="position-size" class="copyable">-</span>
             </div>
             <div class="result-item">
-                Risk per Share: $<span id="risk-per-share" class="copyable">-</span>
+              Risk per Share: $<span id="risk-per-share" class="copyable">-</span>
             </div>
             <div class="result-item">
-                Trade Risk: <span id="percent-risked" class="copyable">-</span>%
+              Trade Risk: <span id="percent-risked" class="copyable">-</span>%
             </div>
             <div class="result-item result-item--primary">
-                Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
+              Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
+            </div>
+            <div class="result-item">1R: $<span id="one-r" class="copyable">-</span></div>
+            <div class="result-item">2R: $<span id="two-r" class="copyable">-</span></div>
+            <div class="result-item">3R: $<span id="three-r" class="copyable">-</span></div>
+            <div class="result-item">
+              Max Positions: <span id="max-positions" class="copyable">-</span>
             </div>
             <div class="result-item">
-                1R: $<span id="one-r" class="copyable">-</span>
+              Position Allotment: $<span id="position-allotment" class="copyable">-</span>
             </div>
-            <div class="result-item">
-                2R: $<span id="two-r" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-                3R: $<span id="three-r" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-                Max Positions: <span id="max-positions" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-                Position Allotment: $<span id="position-allotment" class="copyable">-</span>
-            </div>
-                </section>
-            </section>
+          </section>
+        </section>
+      </div>
+
+      <!-- History -->
+      <details id="history-details" class="calculator-details">
+        <summary>History</summary>
+        <div class="calculator-details__content">
+          <div id="results-container"></div>
         </div>
+      </details>
 
-        <!-- History -->
-        <details id="history-details" class="calculator-details">
-            <summary>History</summary>
-            <div class="calculator-details__content">
-                <div id="results-container"></div>
-            </div>
-        </details>
-        
-
-         <!-- Instructions 
+      <!-- Instructions 
         <p>
         <section class="tutorial" id="tutorial-total-account-risk">  
         <h2>How to Use the Total Account Risk Calculator</h2>
@@ -205,5 +272,6 @@
         For a more in-depth tutorial and how to interpret the results, visit: <a href="calculatorinstructions.html">Instructions</a>.
     </section>
 -->
-</body>
+    </div>
+  </body>
 </html>

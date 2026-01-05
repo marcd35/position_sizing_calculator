@@ -1,116 +1,67 @@
 # Position Sizing Calculator
 
-A suite of three position sizing calculators designed for swing traders to manage risk and optimize trade sizing.
+A suite of three position sizing calculators designed for swing traders to manage risk and optimize trade sizing. Calculate your position sizes with confidence using professional risk management tools.
 
-## Overview
+🔗 **[Launch Calculator](https://www.positionsizingcalculator.com)** | 📖 **[View Instructions](https://www.positionsizingcalculator.com/calculatorinstructions.html)**
 
-This tool provides three different calculation methods to help traders determine appropriate position sizes based on their risk management strategy:
+## What This Tool Does
 
-1. **Total Account Risk %** - Calculate position size based on the percentage of your total account you're willing to risk
-2. **Dollar Risk** - Calculate position size based on a fixed dollar amount you're willing to risk
-3. **Position Percent** - Calculate position size based on the percentage of your portfolio you want to allocate to a position
+This calculator helps you answer one critical question: **"How many shares should I buy?"**
+
+It provides three different calculation methods so you can choose the approach that matches your trading strategy:
+
+1. **Total Risk %** - Risk a percentage of your account (e.g., "I risk 1% per trade")
+2. **Dollar Risk** - Risk a fixed dollar amount (e.g., "I risk $100 per trade")
+3. **Position %** - Allocate a percentage of capital (e.g., "I put 5% of my account in each trade")
+
+All three methods help you size positions properly based on your entry price and stop loss.
 
 ## Features
 
-- **Three Calculation Methods**: Choose the method that best fits your trading strategy
-- **Long & Short Positions**: Automatically detects and handles both long and short positions
-- **Risk Metrics**: Displays risk per share, dollars risked, and position size as % of account
-- **Calculation History**: Keeps track of your recent calculations with timestamps
-- **Copy to Clipboard**: Click any blue result to copy it to your clipboard
-- **Clean Interface**: Simple, user-friendly design focused on essential calculations
+- ✅ **Long & Short Positions** - Automatically detects and handles both directions
+- ✅ **Real-Time Calculations** - Results update as you type
+- ✅ **Risk Metrics** - See risk per share, dollars risked, and position size as % of account
+- ✅ **Calculation History** - Tracks your recent calculations with timestamps
+- ✅ **Copy to Clipboard** - Click any blue result to copy it
+- ✅ **Theme Options** - Light, dark, and grayscale modes
+- ✅ **Mobile Friendly** - Responsive design works on all devices
+- ✅ **Keyboard Shortcuts** - Press Enter to calculate, Escape to clear
 
-## Calculation Methods
+## Quick Start
 
-### Method 1: Total Account Risk %
-Determine your position size based on what percentage of your total account you're willing to risk on a single trade.
+1. Visit [positionsizingcalculator.com](https://www.positionsizingcalculator.com)
+2. Choose your preferred method (Total Risk %, Dollar Risk, or Position %)
+3. Enter your account value, risk tolerance, entry price, and stop loss
+4. Your results appear automatically
 
-**Inputs:**
-- Account Value
-- Risk Percentage (% of account to risk)
-- Entry Price
-- Stop Loss
-- Max Positions (optional - for portfolio allocation)
-- Ticker Symbol (optional)
+For detailed instructions and examples, see the [FAQ page](https://www.positionsizingcalculator.com/calculatorinstructions.html).
 
-**Outputs:**
-- Maximum Shares
-- Position Size
-- Risk per Share
-- Percent Risked per Trade
-- Dollars Risked
-- Target Profit Prices (1R, 2R, 3R)
-- Position Allotment (if max positions specified)
+## Example Use Case
 
-### Method 2: Dollar Risk
-Determine your position size based on a fixed dollar amount you're willing to risk.
+**Scenario:** You have a $10,000 account and want to risk 1% ($100) per trade.
 
-**Inputs:**
-- Dollar Risk Amount
-- Entry Price
-- Stop Loss
-- Account Value (optional - for % calculation)
-- Ticker Symbol (optional)
+**Using Total Risk % Calculator:**
+- Account Value: $10,000
+- Risk %: 1%
+- Entry Price: $50.00
+- Stop Loss: $48.00
 
-**Outputs:**
-- Maximum Shares
-- Position Size
-- Risk per Share
-- Dollars Risked
-- Position Size as % of Account (if account value provided)
-
-### Method 3: Position Percent
-Determine your position size based on what percentage of your portfolio you want to allocate to a position.
-
-**Inputs:**
-- Account Value
-- Position Risk % (% of account to allocate)
-- Entry Price
-- Stop Loss
-- Ticker Symbol (optional)
-
-**Outputs:**
-- Maximum Shares
-- Position Size
-- Risk per Share
-- Percent Risked
-- Dollars Risked
-
-## Usage
-
-1. Choose the calculator that matches your risk management approach
-2. Fill in the required fields
-3. Click "Calculate" to see your results
-4. Click any blue result value to copy it to your clipboard
-5. View your calculation history below the results
+**Result:** Buy up to 50 shares (risking $2.00 per share × 50 shares = $100 total risk)
 
 ## Technology
 
 - Pure HTML, CSS, and JavaScript
-- No dependencies or frameworks
-- Works offline
-- Mobile-friendly responsive design
-
-## Testing
-
-Basic browser tests are available for the core calculation utilities.
-
-- Tests location: [tests/calculators.test.html](tests/calculators.test.html)
-- How to run:
-	1. Open the HTML file in a browser
-	2. Review pass/fail results rendered on the page
-
-These tests cover:
-- `determinePositionType()` for Long/Short/Invalid detection
-- `calculateRiskPerShare()` for numeric differences
-- `calculateTargets()` for 1R/2R/3R computations on Long and Short positions
+- No dependencies or frameworks required
+- Works offline after first load
+- No data collection or server-side processing
 
 ## About
 
-This calculator was developed and maintained by [r/swingtrading](https://www.reddit.com/r/swingtrading/) moderator [Cheungster](https://www.reddit.com/user/cheungster/) in collaboration with ChatGPT.
+This calculator was developed and maintained by [r/swingtrading](https://www.reddit.com/r/swingtrading/) moderator [Cheungster](https://www.reddit.com/user/cheungster/) in collaboration with the trading community.
 
 At r/swingtrading, the mission is to provide evidence-based education and empower traders to make smarter trading decisions by prioritizing [risk management protocols](https://www.investopedia.com/terms/r/riskmanagement.asp).
 
-## Community
+### Community
 
 - **Subreddit**: [r/swingtrading](https://www.reddit.com/r/swingtrading/)
 - **Discord**: [Join our Discord server](https://discord.gg/yWFavAVQpm)
@@ -125,4 +76,4 @@ Domain and hosting costs are independently supported by generous community membe
 
 ## License
 
-This project is maintained as a free educational resource for the swing trading community.
+This project is maintained as a free educational resource for the swing trading community and all traders worldwide.

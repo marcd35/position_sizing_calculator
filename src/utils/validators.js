@@ -1,20 +1,19 @@
-// @ts-check
 /**
  * Validates that a value is a valid number
- * @param {number|string} value 
+ * @param {number|string} value
  * @returns {boolean}
  */
 function isValidNumber(value) {
-    return value !== '' && value !== null && !isNaN(parseFloat(value)) && isFinite(value);
+  return value !== '' && value !== null && !isNaN(parseFloat(value)) && isFinite(value);
 }
 
 /**
  * Validates that a value is a positive number
- * @param {number|string} value 
+ * @param {number|string} value
  * @returns {boolean}
  */
 function isPositiveNumber(value) {
-    return isValidNumber(value) && parseFloat(value) > 0;
+  return isValidNumber(value) && parseFloat(value) > 0;
 }
 
 /**
@@ -23,20 +22,20 @@ function isPositiveNumber(value) {
  * @returns {boolean} - True if all valid
  */
 function validateInputs(inputs) {
-    for (const [key, value] of Object.entries(inputs)) {
-        if (!isValidNumber(value)) {
-            return false;
-        }
+  for (const [key, value] of Object.entries(inputs)) {
+    if (!isValidNumber(value)) {
+      return false;
     }
-    return true;
+  }
+  return true;
 }
 
 /**
  * Validates entry and stop loss relationship
- * @param {number} entry 
- * @param {number} stop 
+ * @param {number} entry
+ * @param {number} stop
  * @returns {boolean}
  */
 function validatePrices(entry, stop) {
-    return parseFloat(entry) !== parseFloat(stop);
+  return parseFloat(entry) !== parseFloat(stop);
 }

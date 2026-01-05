@@ -1,4 +1,3 @@
-// @ts-check
 /**
  * Global JSDoc typedefs for calculator app
  */

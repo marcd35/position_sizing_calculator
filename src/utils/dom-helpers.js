@@ -1,51 +1,50 @@
-// @ts-check
 /**
  * Updates text content of an element safely
- * @param {string} id 
- * @param {string} value 
+ * @param {string} id
+ * @param {string} value
  */
 function updateText(id, value) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.textContent = value;
-    }
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = value;
+  }
 }
 
 /**
  * Clears multiple input fields
- * @param {string[]} ids 
+ * @param {string[]} ids
  */
 function clearInputs(ids) {
-    ids.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.value = '';
-            // Reset range inputs to default if needed, or handle specifically
-            if (element.type === 'range') {
-                // element.value = element.min || 0; // Optional behavior
-            }
-        }
-    });
+  ids.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.value = '';
+      // Reset range inputs to default if needed, or handle specifically
+      if (element.type === 'range') {
+        // element.value = element.min || 0; // Optional behavior
+      }
+    }
+  });
 }
 
 /**
  * Resets result displays to default '-'
- * @param {string[]} ids 
+ * @param {string[]} ids
  */
 function resetResults(ids) {
-    ids.forEach(id => updateText(id, '-'));
+  ids.forEach((id) => updateText(id, '-'));
 }
 
 /**
  * Adds a history entry to the container
- * @param {string} containerId 
- * @param {string} htmlContent 
+ * @param {string} containerId
+ * @param {string} htmlContent
  */
 function addHistoryEntry(containerId, htmlContent) {
-    const container = document.getElementById(containerId);
-    if (container) {
-        container.insertAdjacentHTML('afterbegin', htmlContent);
-    }
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.insertAdjacentHTML('afterbegin', htmlContent);
+  }
 }
 
 /**
@@ -54,33 +53,33 @@ function addHistoryEntry(containerId, htmlContent) {
  * @param {string} message
  */
 function showFieldError(inputId, message) {
-    const input = document.getElementById(inputId);
-    if (!input) return;
-    input.classList.add('error');
-    input.setAttribute('aria-invalid','true');
-    const parent = input.parentElement;
-    if (!parent) return;
-    let msg = parent.querySelector('.error-message');
-    if (!msg) {
-        msg = document.createElement('div');
-        msg.className = 'error-message';
-        msg.id = inputId + '-error';
-        parent.appendChild(msg);
-    }
-    msg.textContent = message;
-    input.setAttribute('aria-describedby', msg.id);
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.classList.add('error');
+  input.setAttribute('aria-invalid', 'true');
+  const parent = input.parentElement;
+  if (!parent) return;
+  let msg = parent.querySelector('.error-message');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.className = 'error-message';
+    msg.id = inputId + '-error';
+    parent.appendChild(msg);
+  }
+  msg.textContent = message;
+  input.setAttribute('aria-describedby', msg.id);
 
-    // Show subtle hint if available
-    if (typeof FIELD_HINTS === 'object' && FIELD_HINTS[inputId]) {
-        let hint = parent.querySelector('.hint-message');
-        if (!hint) {
-            hint = document.createElement('div');
-            hint.className = 'hint-message';
-            hint.id = inputId + '-hint';
-            parent.appendChild(hint);
-        }
-        hint.textContent = FIELD_HINTS[inputId];
+  // Show subtle hint if available
+  if (typeof FIELD_HINTS === 'object' && FIELD_HINTS[inputId]) {
+    let hint = parent.querySelector('.hint-message');
+    if (!hint) {
+      hint = document.createElement('div');
+      hint.className = 'hint-message';
+      hint.id = inputId + '-hint';
+      parent.appendChild(hint);
     }
+    hint.textContent = FIELD_HINTS[inputId];
+  }
 }
 
 /**
@@ -88,17 +87,17 @@ function showFieldError(inputId, message) {
  * @param {string} inputId
  */
 function clearFieldError(inputId) {
-    const input = document.getElementById(inputId);
-    if (!input) return;
-    input.classList.remove('error');
-    input.removeAttribute('aria-invalid');
-    input.removeAttribute('aria-describedby');
-    const parent = input.parentElement;
-    if (!parent) return;
-    const msg = parent.querySelector('.error-message');
-    if (msg) parent.removeChild(msg);
-    const hint = parent.querySelector('.hint-message');
-    if (hint) parent.removeChild(hint);
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.classList.remove('error');
+  input.removeAttribute('aria-invalid');
+  input.removeAttribute('aria-describedby');
+  const parent = input.parentElement;
+  if (!parent) return;
+  const msg = parent.querySelector('.error-message');
+  if (msg) parent.removeChild(msg);
+  const hint = parent.querySelector('.hint-message');
+  if (hint) parent.removeChild(hint);
 }
 
 /**
@@ -106,7 +105,7 @@ function clearFieldError(inputId) {
  * @param {string[]} ids
  */
 function clearFieldErrors(ids) {
-    ids.forEach(id => clearFieldError(id));
+  ids.forEach((id) => clearFieldError(id));
 }
 
 /**
@@ -114,13 +113,13 @@ function clearFieldErrors(ids) {
  * @param {string[]} ids
  */
 function focusFirstInvalid(ids) {
-    for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.classList.contains('error')) {
-            el.focus();
-            break;
-        }
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el && el.classList.contains('error')) {
+      el.focus();
+      break;
     }
+  }
 }
 
 /**
@@ -131,18 +130,18 @@ function focusFirstInvalid(ids) {
  * @returns {(...args: Parameters<T>) => void}
  */
 function debounce(fn, waitMs) {
-    /** @type {number | undefined} */
-    let timeoutId;
-    return function debounced() {
-        const args = arguments;
-        if (timeoutId) {
-            window.clearTimeout(timeoutId);
-        }
-        timeoutId = window.setTimeout(() => {
-            timeoutId = undefined;
-            fn.apply(null, args);
-        }, waitMs);
-    };
+  /** @type {number | undefined} */
+  let timeoutId;
+  return function debounced() {
+    const args = arguments;
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+    timeoutId = window.setTimeout(() => {
+      timeoutId = undefined;
+      fn.apply(null, args);
+    }, waitMs);
+  };
 }
 
 /**
@@ -151,11 +150,11 @@ function debounce(fn, waitMs) {
  * @param {boolean} disabled
  */
 function setResultsDisabled(sectionId, disabled) {
-    const el = document.getElementById(sectionId);
-    if (!el) return;
-    if (disabled) {
-        el.classList.add('results-section--disabled');
-    } else {
-        el.classList.remove('results-section--disabled');
-    }
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+  if (disabled) {
+    el.classList.add('results-section--disabled');
+  } else {
+    el.classList.remove('results-section--disabled');
+  }
 }

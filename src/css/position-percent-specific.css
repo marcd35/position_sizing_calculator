@@ -2,15 +2,15 @@
 /* Only includes styles unique to the position percent calculator */
 
 .slider-input-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.slider-input-container input[type="number"] {
-    flex: 1;
+.slider-input-container input[type='number'] {
+  flex: 1;
 }
 
-.slider-input-container input[type="range"] {
-    flex: 1;
+.slider-input-container input[type='range'] {
+  flex: 1;
 }

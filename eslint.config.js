@@ -2,7 +2,7 @@ const js = require('@eslint/js');
 
 module.exports = [
   {
-    ignores: ['public/media/**', 'calculator.js']
+    ignores: ['public/media/**'],
   },
   js.configs.recommended,
   {
@@ -19,15 +19,15 @@ module.exports = [
         HTMLElement: 'readonly',
         requestAnimationFrame: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly'
-      }
+        clearTimeout: 'readonly',
+      },
     },
     rules: {
       eqeqeq: 'warn',
       'no-unused-vars': ['warn', { args: 'none', varsIgnorePattern: '^_' }],
       'no-alert': 'error',
-      'no-undef': 'off'
-    }
+      'no-undef': 'off',
+    },
   },
   {
     files: ['tests/**/*.js'],
@@ -35,8 +35,8 @@ module.exports = [
       globals: {
         determinePositionType: 'readonly',
         calculateRiskPerShare: 'readonly',
-        calculateTargets: 'readonly'
-      }
-    }
-  }
+        calculateTargets: 'readonly',
+      },
+    },
+  },
 ];

@@ -1,17 +1,25 @@
 // Simple browser test harness for calculators.js
-(function(){
+(function () {
   function approxEqual(a, b, epsilon = 1e-9) {
     return Math.abs(a - b) <= epsilon;
   }
 
   function assertEqual(actual, expected, name) {
     const pass = actual === expected;
-    window.__TESTS__.push({ name, pass, details: pass ? '' : `Expected ${expected}, got ${actual}` });
+    window.__TESTS__.push({
+      name,
+      pass,
+      details: pass ? '' : `Expected ${expected}, got ${actual}`,
+    });
   }
 
   function assertApprox(actual, expected, name, epsilon = 1e-6) {
     const pass = approxEqual(actual, expected, epsilon);
-    window.__TESTS__.push({ name, pass, details: pass ? '' : `Expected ~${expected}, got ${actual}` });
+    window.__TESTS__.push({
+      name,
+      pass,
+      details: pass ? '' : `Expected ~${expected}, got ${actual}`,
+    });
   }
 
   function render() {
@@ -21,7 +29,7 @@
     list.style.padding = '0';
 
     let passed = 0;
-    window.__TESTS__.forEach(t => {
+    window.__TESTS__.forEach((t) => {
       const li = document.createElement('li');
       li.style.margin = '6px 0';
       li.textContent = `${t.pass ? '✅' : '❌'} ${t.name}${t.details ? ' — ' + t.details : ''}`;
@@ -39,12 +47,20 @@
     container.appendChild(summary);
   }
 
-  function runTests(){
+  function runTests() {
     window.__TESTS__ = [];
 
     // determinePositionType
-    assertEqual(determinePositionType(100, 90), 'Long Position', 'Position type: Long when entry>stop');
-    assertEqual(determinePositionType(90, 100), 'Short Position', 'Position type: Short when stop>entry');
+    assertEqual(
+      determinePositionType(100, 90),
+      'Long Position',
+      'Position type: Long when entry>stop',
+    );
+    assertEqual(
+      determinePositionType(90, 100),
+      'Short Position',
+      'Position type: Short when stop>entry',
+    );
     assertEqual(determinePositionType(100, 100), 'Invalid', 'Position type: Invalid when equal');
 
     // calculateRiskPerShare

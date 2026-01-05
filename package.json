@@ -2,7 +2,6 @@
   "name": "positionsizingcalculator",
   "version": "1.0.0",
   "description": "A suite of three position sizing calculators designed for swing traders to manage risk and optimize trade sizing.",
-  "main": "calculator.js",
   "directories": {
     "test": "tests"
   },
