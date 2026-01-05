@@ -122,3 +122,40 @@ function focusFirstInvalid(ids) {
         }
     }
 }
+
+/**
+ * Debounce helper
+ * @template {(...args: any[]) => any} T
+ * @param {T} fn
+ * @param {number} waitMs
+ * @returns {(...args: Parameters<T>) => void}
+ */
+function debounce(fn, waitMs) {
+    /** @type {number | undefined} */
+    let timeoutId;
+    return function debounced() {
+        const args = arguments;
+        if (timeoutId) {
+            window.clearTimeout(timeoutId);
+        }
+        timeoutId = window.setTimeout(() => {
+            timeoutId = undefined;
+            fn.apply(null, args);
+        }, waitMs);
+    };
+}
+
+/**
+ * Toggle a disabled visual state for a results section.
+ * @param {string} sectionId
+ * @param {boolean} disabled
+ */
+function setResultsDisabled(sectionId, disabled) {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    if (disabled) {
+        el.classList.add('results-section--disabled');
+    } else {
+        el.classList.remove('results-section--disabled');
+    }
+}

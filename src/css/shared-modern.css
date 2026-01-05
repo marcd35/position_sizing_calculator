@@ -1,0 +1,286 @@
+/* Modern Layout Overrides - Unique Shapes and Styling */
+
+/* Header flush with top and better spacing */
+.site-header {
+    border-radius: 0 0 24px 24px !important;
+    box-shadow: var(--box-shadow-medium) !important;
+    margin-bottom: 32px !important;
+    padding: 16px 20px !important;
+    border: 1px solid var(--border-color) !important;
+    border-top: none !important;
+}
+
+/* Add padding to main content area */
+.container {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    margin-top: 0 !important;
+    margin-bottom: 32px !important;
+}
+
+/* Modern theme toggle - sliding switch style */
+.site-theme-toggle {
+    background: var(--border-color) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 50px !important;
+    width: 60px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    font-size: 14px !important;
+    transition: all var(--transition-standard) !important;
+    padding: 3px !important;
+    position: relative !important;
+    cursor: pointer !important;
+}
+
+.site-theme-toggle::after {
+    content: '☀️';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all var(--transition-smooth);
+    left: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .site-theme-toggle {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    justify-content: flex-end !important;
+}
+
+html[data-theme="dark"] .site-theme-toggle::after {
+    content: '🌙';
+    left: calc(100% - 27px);
+}
+
+.site-theme-toggle:hover {
+    transform: scale(1.05) !important;
+}
+
+/* Modern navigation toggle */
+.site-nav__toggle {
+    background: var(--light-bg) !important;
+    color: var(--text-color) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 50px !important;
+    font-weight: var(--font-weight-semibold) !important;
+    padding: 8px 16px !important;
+    transition: all var(--transition-standard) !important;
+}
+
+.site-nav__toggle:hover {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    background: var(--surface-hover) !important;
+}
+
+/* Pill-shaped navigation links */
+.site-nav__link {
+    border-radius: 50px !important;
+    padding: 10px 16px !important;
+    border: 2px solid transparent !important;
+    transition: all var(--transition-standard) !important;
+}
+
+.site-nav__link:hover {
+    background: var(--light-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.site-nav__link[aria-current="page"] {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color)) !important;
+    color: white !important;
+    border-color: transparent !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+@media (min-width: 720px) {
+    .site-nav__link {
+        background: transparent !important;
+    }
+}
+
+/* Main container with gradient border around ENTIRE container */
+.container {
+    border-radius: 24px !important;
+    position: relative;
+    overflow: visible !important;
+    border: 4px solid transparent !important;
+    background: linear-gradient(var(--surface-color), var(--surface-color)) padding-box,
+                linear-gradient(90deg, var(--primary-color), var(--accent-color)) border-box !important;
+}
+
+/* Fix clipping on input container */
+.input-container {
+    border-radius: 16px !important;
+    clip-path: none !important;
+    overflow: visible !important;
+}
+
+/* Fix clipping on results container */
+#result-dollar,
+#results-container-dollar,
+.results-section {
+    border-radius: 16px !important;
+    clip-path: none !important;
+    overflow: visible !important;
+}
+
+/* Modern pill buttons with hover effect */
+button {
+    background: transparent !important;
+    color: var(--text-color) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 50px !important;
+    position: relative;
+    overflow: hidden;
+    padding: 12px 24px !important;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2) !important;
+}
+
+.btn--danger {
+    border-color: var(--error-color) !important;
+    color: var(--error-color) !important;
+}
+
+.btn--danger:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Align buttons to the right */
+.button-group {
+    justify-content: flex-end !important;
+    margin-top: 20px;
+}
+
+/* Modern toggle-style position indicator - FIXED COLOR LOGIC */
+.position-indicator {
+    border-radius: 50px !important;
+    border: 2px solid var(--border-color) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    padding: 14px 20px !important;
+    margin-bottom: 20px !important;
+    background: var(--surface-hover) !important;
+    transition: all var(--transition-standard) !important;
+}
+
+/* When position type is Long - Blue */
+.position-indicator[data-position="long"],
+.position-indicator:has(#position-indicator[data-position="long"]) {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* When position type is Short - Orange */
+.position-indicator[data-position="short"],
+.position-indicator:has(#position-indicator[data-position="short"]) {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.05)) !important;
+    border-color: #f97316 !important;
+}
+
+#position-indicator {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 20px !important;
+    border-radius: 50px !important;
+    font-weight: var(--font-weight-bold) !important;
+    font-size: 14px !important;
+    transition: all var(--transition-standard) !important;
+    margin-left: auto !important;
+}
+
+/* Long position - Blue with up arrow */
+#position-indicator[data-position="long"] {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+}
+
+#position-indicator[data-position="long"]::before {
+    content: '▲';
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+/* Short position - Orange with down arrow */
+#position-indicator[data-position="short"] {
+    background: linear-gradient(135deg, #f97316, #ea580c) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4) !important;
+}
+
+#position-indicator[data-position="short"]::before {
+    content: '▼';
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+/* History cards with gradient accent */
+.recent-result {
+    border-radius: 12px !important;
+    position: relative;
+    overflow: visible !important;
+}
+
+.recent-result::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+    border-radius: 12px 0 0 12px;
+    opacity: 0;
+    transition: opacity var(--transition-standard);
+}
+
+.recent-result:hover {
+    transform: translateX(4px) !important;
+}
+
+.recent-result:hover::before {
+    opacity: 1;
+}
+
+/* Rounded details/accordion */
+.calculator-details {
+    border-radius: 16px !important;
+    overflow: visible !important;
+}

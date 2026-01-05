@@ -26,8 +26,41 @@
             .replace(/'/g, '&#039;');
     }
 
+    function getStoredTheme() {
+        try {
+            return window.localStorage ? window.localStorage.getItem('theme') : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function setStoredTheme(theme) {
+        try {
+            if (window.localStorage) {
+                window.localStorage.setItem('theme', theme);
+            }
+        } catch {
+            // Ignore storage errors
+        }
+    }
+
+    function applyTheme(theme) {
+        var safeTheme = theme === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', safeTheme);
+        return safeTheme;
+    }
+
+    function initTheme() {
+        // Default: light
+        var stored = getStoredTheme();
+        var theme = stored === 'dark' ? 'dark' : 'light';
+        return applyTheme(theme);
+    }
+
     function insertHeader() {
         if (document.querySelector('.site-header')) return;
+
+        var currentTheme = initTheme();
 
         var currentFile = getCurrentFile();
 
@@ -44,6 +77,8 @@
             );
         }).join('');
 
+        var themeButtonLabel = '';
+
         var headerHtml =
             '<header class="site-header" role="banner">' +
             '  <div class="site-header__inner">' +
@@ -51,7 +86,12 @@
             '      <img class="site-brand__icon" src="public/media/rswingtrading_icon.jpg" alt="" width="28" height="28" />' +
             '      <span class="site-brand__text">Position Sizing Calculator</span>' +
             '    </a>' +
-            '    <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>' +
+            '    <div class="site-header__actions">' +
+            '      <button class="site-theme-toggle" type="button" data-theme-toggle aria-pressed="' +
+            (currentTheme === 'dark' ? 'true' : 'false') +
+            '" aria-label="Toggle dark mode"></button>' +
+            '      <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>' +
+            '    </div>' +
             '  </div>' +
             '  <nav id="primary-nav" class="site-nav" aria-label="Primary" hidden>' +
             '    <div class="site-nav__links">' +
@@ -69,6 +109,7 @@
 
         var toggle = document.querySelector('[data-nav-toggle]');
         var nav = document.getElementById('primary-nav');
+        var themeToggle = document.querySelector('[data-theme-toggle]');
 
         function isDesktop() {
             return window.matchMedia && window.matchMedia('(min-width: 720px)').matches;
@@ -92,6 +133,18 @@
 
         // Default state
         setOpen(false);
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                var current = document.documentElement.getAttribute('data-theme');
+                var next = current === 'dark' ? 'light' : 'dark';
+                var applied = applyTheme(next);
+                setStoredTheme(applied);
+
+                themeToggle.setAttribute('aria-pressed', applied === 'dark' ? 'true' : 'false');
+                // No text content needed - CSS handles the visual with emojis
+            });
+        }
 
         if (toggle) {
             toggle.addEventListener('click', function () {
@@ -170,6 +223,8 @@
     }
 
     function init() {
+        // Apply theme early even if header is missing for some reason.
+        initTheme();
         insertHeader();
         insertFooter();
         removeRedundantSections();

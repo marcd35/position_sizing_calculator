@@ -9,7 +9,9 @@ window.RISK_MULTIPLES = { ONE_R: 1, TWO_R: 2, THREE_R: 3 };
  */
 window.ERROR_MESSAGES = {
 	invalidNumber: 'Please enter a valid number.',
+	positiveNumber: 'Please enter a number greater than 0.',
 	invalidPercentage: 'Please enter a valid percentage.',
+	riskPercentageRange: 'Total account risk must be between 0 and 100.',
 	percentageRange: 'Position risk must be between 0 and 100.',
 	entryStopEqual: 'Entry price and stop loss cannot be equal.',
 	dollarRiskPositive: 'Dollar risk must be greater than 0.',

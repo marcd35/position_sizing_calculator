@@ -3,10 +3,31 @@
  * Initializes copy-to-clipboard functionality for elements with class 'copyable'
  */
 function initClipboard() {
+    // Ensure copyable elements are focusable and have a button-like role
+    document.querySelectorAll('.copyable').forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+        if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+        if (!el.hasAttribute('aria-label')) el.setAttribute('aria-label', 'Copy value');
+    });
+
     document.addEventListener('click', function(e) {
         const target = e.target;
         if (!(target instanceof HTMLElement)) return;
         if (target.classList.contains('copyable')) {
+            const text = target.textContent || '';
+            if (!text || text === '-') return;
+            copyToClipboard(text, target);
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (!target.classList.contains('copyable')) return;
+
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
             const text = target.textContent || '';
             if (!text || text === '-') return;
             copyToClipboard(text, target);

@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const entryPriceInput = document.getElementById('entryPrice');
     const stopLossInput = document.getElementById('stopLoss');
     const tickerSymbolInput = document.getElementById('tickerSymbol');
-    const calculateButton = document.getElementById('calculateButton');
     const clearButton = document.getElementById('clearButton');
 
     // Sync slider with input field
@@ -29,14 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (riskPercentageInput && riskPercentageSlider) {
                 riskPercentageInput.value = value;
                 riskPercentageSlider.value = value;
+                riskPercentageInput.dispatchEvent(new Event('input', { bubbles: true }));
             }
         });
     });
-
-    // Calculate button
-    if (calculateButton) {
-        calculateButton.addEventListener('click', calculate);
-    }
 
     // Clear button
     if (clearButton) {
@@ -56,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('percent-risked').textContent = '-';
             document.getElementById('dollars-risked').textContent = '-';
             document.getElementById('position-indicator').textContent = '-';
+
+            setResultsDisabled('result', true);
         });
     }
 
@@ -70,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Keyboard shortcuts: Enter to calculate, Escape to clear
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            calculate();
+            calculate({ source: 'manual' });
         } else if (e.key === 'Escape') {
             if (clearButton) clearButton.click();
         }
@@ -80,13 +77,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initClipboard === 'function') {
         initClipboard();
     }
+
+    const inputIds = ['accountValue','riskPercentage','riskPercentageSlider','entryPrice','stopLoss','tickerSymbol'];
+    const scheduleAutoCalc = typeof debounce === 'function'
+        ? debounce(() => calculate({ source: 'auto' }), 250)
+        : () => calculate({ source: 'auto' });
+
+    inputIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => scheduleAutoCalc());
+            el.addEventListener('change', () => scheduleAutoCalc());
+        }
+    });
+
+    // Initial calculation with defaults (silent)
+    scheduleAutoCalc();
 });
 
-function calculate() {
+function calculate(options) {
     /**
      * Position Percent calculator compute handler
      * @returns {void}
      */
+    const source = options && options.source ? options.source : 'manual';
+    const isAuto = source === 'auto';
+
     // Get input values
     const accountValue = parseFloat(document.getElementById('accountValue').value);
     const riskPercentage = parseFloat(document.getElementById('riskPercentage').value);
@@ -98,19 +114,60 @@ function calculate() {
     clearFieldErrors(['accountValue','riskPercentage','entryPrice','stopLoss']);
     // Validate inputs
     if (!validateInputs({ accountValue, riskPercentage, entryPrice, stopLoss })) {
+        setResultsDisabled('result', true);
         if (!isValidNumber(accountValue)) showFieldError('accountValue', ERROR_MESSAGES.invalidNumber);
         if (!isValidNumber(riskPercentage)) showFieldError('riskPercentage', ERROR_MESSAGES.invalidPercentage);
         if (!isValidNumber(entryPrice)) showFieldError('entryPrice', ERROR_MESSAGES.invalidNumber);
         if (!isValidNumber(stopLoss)) showFieldError('stopLoss', ERROR_MESSAGES.invalidNumber);
-        focusFirstInvalid(['accountValue','riskPercentage','entryPrice','stopLoss']);
-        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        if (!isAuto) {
+            focusFirstInvalid(['accountValue','riskPercentage','entryPrice','stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','position-indicator']);
         return;
     }
 
     if (riskPercentage < 0 || riskPercentage > 100) {
+        setResultsDisabled('result', true);
         showFieldError('riskPercentage', ERROR_MESSAGES.percentageRange);
-        focusFirstInvalid(['riskPercentage']);
-        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.percentageRange);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['riskPercentage']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.percentageRange);
+        }
+        return;
+    }
+
+    if (!isPositiveNumber(accountValue)) {
+        setResultsDisabled('result', true);
+        showFieldError('accountValue', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['accountValue']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        return;
+    }
+
+    if (!isPositiveNumber(entryPrice)) {
+        setResultsDisabled('result', true);
+        showFieldError('entryPrice', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['entryPrice']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        return;
+    }
+
+    if (!isPositiveNumber(stopLoss)) {
+        setResultsDisabled('result', true);
+        showFieldError('stopLoss', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
         return;
     }
 
@@ -118,13 +175,19 @@ function calculate() {
     const positionIndicator = document.getElementById('position-indicator');
     const positionType = determinePositionType(entryPrice, stopLoss);
     if (positionType === 'Invalid') {
+        setResultsDisabled('result', true);
         updateText('position-indicator', 'Entry price and Stop are equal.');
         showFieldError('entryPrice', ERROR_MESSAGES.entryStopEqual);
         showFieldError('stopLoss', ERROR_MESSAGES.entryStopEqual);
-        focusFirstInvalid(['entryPrice','stopLoss']);
-        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.entryStopEqual);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked']);
+        if (!isAuto) {
+            focusFirstInvalid(['entryPrice','stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.entryStopEqual);
+        }
         return;
     }
+
+    setResultsDisabled('result', false);
     updateText('position-indicator', positionType);
 
     // Calculate core variables
@@ -145,7 +208,7 @@ function calculate() {
     // Update history
     const timestamp = new Date().toLocaleString();
     const ariaLive = document.getElementById('aria-live');
-    if (ariaLive) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
+    if (ariaLive && !isAuto) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
     const resultContainer = document.getElementById('results-container');
     const safeTicker = escapeHTML(tickerSymbol);
     const historyHTML = `
@@ -167,5 +230,5 @@ function calculate() {
     addHistoryEntry('results-container', historyHTML);
 
     // Success notification
-    if (typeof notify === 'function') notify('success','Calculation complete.');
+    if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');
 }

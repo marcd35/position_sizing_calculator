@@ -12,40 +12,61 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInputs(['accountValue','riskPercentage','entryPrice','stopLoss','maxPositions','tickerSymbol']);
             // Reset results
             resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+            setResultsDisabled('result', true);
         });
     }
 
     // Clear field-level errors on input
-    ['accountValue','riskPercentage','entryPrice','stopLoss'].forEach((id) => {
+    const inputIds = ['accountValue','riskPercentage','entryPrice','stopLoss','maxPositions','tickerSymbol'];
+    inputIds.forEach((id) => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', () => clearFieldError(id));
         }
     });
 
+    const scheduleAutoCalc = typeof debounce === 'function'
+        ? debounce(() => calculate({ source: 'auto' }), 250)
+        : () => calculate({ source: 'auto' });
+
+    inputIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => scheduleAutoCalc());
+            el.addEventListener('change', () => scheduleAutoCalc());
+        }
+    });
+
     // Keyboard shortcuts: Enter to calculate, Escape to clear
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            calculate();
+            calculate({ source: 'manual' });
         } else if (e.key === 'Escape') {
             if (clearButton) clearButton.click();
         }
     });
+
+    // Initial calculation with defaults (silent)
+    scheduleAutoCalc();
 });
 
 function setRisk(value) {
     const riskPercentageInput = document.getElementById('riskPercentage');
     if (riskPercentageInput) {
         riskPercentageInput.value = value;
+        riskPercentageInput.dispatchEvent(new Event('input', { bubbles: true }));
     } else {
         console.error("Risk Percentage input field not found.");
     }
 }
-function calculate() {
+function calculate(options) {
     /**
      * Total Risk calculator compute handler
      * @returns {void}
      */
+    const source = options && options.source ? options.source : 'manual';
+    const isAuto = source === 'auto';
+
     // Get input values
     const accountValue = parseFloat(document.getElementById('accountValue').value);
     const riskPercentage = parseFloat(document.getElementById('riskPercentage').value);
@@ -59,12 +80,61 @@ function calculate() {
     // Validate inputs with field-level feedback
     const inputsMap = { accountValue, riskPercentage, entryPrice, stopLoss };
     if (!validateInputs(inputsMap)) {
+        setResultsDisabled('result', true);
         if (!isValidNumber(accountValue)) showFieldError('accountValue', ERROR_MESSAGES.invalidNumber);
         if (!isValidNumber(riskPercentage)) showFieldError('riskPercentage', ERROR_MESSAGES.invalidPercentage);
         if (!isValidNumber(entryPrice)) showFieldError('entryPrice', ERROR_MESSAGES.invalidNumber);
         if (!isValidNumber(stopLoss)) showFieldError('stopLoss', ERROR_MESSAGES.invalidNumber);
-        focusFirstInvalid(['accountValue','riskPercentage','entryPrice','stopLoss']);
-        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        if (!isAuto) {
+            focusFirstInvalid(['accountValue','riskPercentage','entryPrice','stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+        return;
+    }
+
+    // Range/positive constraints (JS-level, not just HTML attributes)
+    if (!isPositiveNumber(accountValue)) {
+        setResultsDisabled('result', true);
+        showFieldError('accountValue', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['accountValue']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        return;
+    }
+
+    if (riskPercentage < 0 || riskPercentage > 100) {
+        setResultsDisabled('result', true);
+        showFieldError('riskPercentage', ERROR_MESSAGES.riskPercentageRange);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['riskPercentage']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.riskPercentageRange);
+        }
+        return;
+    }
+
+    if (!isPositiveNumber(entryPrice)) {
+        setResultsDisabled('result', true);
+        showFieldError('entryPrice', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['entryPrice']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
+        return;
+    }
+
+    if (!isPositiveNumber(stopLoss)) {
+        setResultsDisabled('result', true);
+        showFieldError('stopLoss', ERROR_MESSAGES.positiveNumber);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment','position-indicator']);
+        if (!isAuto) {
+            focusFirstInvalid(['stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
+        }
         return;
     }
 
@@ -72,13 +142,19 @@ function calculate() {
     const positionIndicator = document.getElementById('position-indicator');
     const positionType = determinePositionType(entryPrice, stopLoss);
     if (positionType === 'Invalid') {
+        setResultsDisabled('result', true);
         updateText('position-indicator', 'Entry price and Stop are equal.');
         showFieldError('entryPrice', ERROR_MESSAGES.entryStopEqual);
         showFieldError('stopLoss', ERROR_MESSAGES.entryStopEqual);
-        focusFirstInvalid(['entryPrice','stopLoss']);
-        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.entryStopEqual);
+        resetResults(['max-shares','position-size','risk-per-share','percent-risked','dollars-risked','one-r','two-r','three-r','max-positions','position-allotment']);
+        if (!isAuto) {
+            focusFirstInvalid(['entryPrice','stopLoss']);
+            if (typeof notify === 'function') notify('error', ERROR_MESSAGES.entryStopEqual);
+        }
         return;
     }
+
+    setResultsDisabled('result', false);
     updateText('position-indicator', positionType);
 
     // Calculate core variables
@@ -130,7 +206,7 @@ function calculate() {
     // Update history
     const timestamp = new Date().toLocaleString();
     const ariaLive = document.getElementById('aria-live');
-    if (ariaLive) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
+    if (ariaLive && !isAuto) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
 
     const resultContainer = document.getElementById('results-container');
     const safeTicker = escapeHTML(tickerSymbol);
@@ -159,5 +235,5 @@ function calculate() {
     addHistoryEntry('results-container', historyHTML);
 
     // Success notification
-    if (typeof notify === 'function') notify('success','Calculation complete.');
+    if (!isAuto && typeof notify === 'function') notify('success','Calculation complete.');
 }
