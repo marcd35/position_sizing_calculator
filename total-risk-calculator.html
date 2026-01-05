@@ -11,25 +11,38 @@
     </script>
     <meta property="og:title" content="Position Sizing Calculator: Total Account Risk %">
     <meta property="og:description" content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!">
-    <meta property="og:image" content="media/rswingtrading_icon.jpg">
+    <meta property="og:image" content="public/media/rswingtrading_icon.jpg">
     <meta property="og:url" content="https://www.positionsizingcalculator.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="media/rswingtrading_icon.jpg">
+    <link rel="icon" type="image/x-icon" href="public/media/rswingtrading_icon.jpg">
     <!-- Local -->
     <title>Position Sizing Calculator: Total Account Risk</title>
-    <link rel="stylesheet" type="text/css" href="calculator.css">
-    <script src="calculator.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="src/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="src/css/shared.css">
+    <!-- Utilities -->
+    <script src="src/constants.js" defer></script>
+    <script src="src/utils/validators.js" defer></script>
+    <script src="src/utils/calculators.js" defer></script>
+    <script src="src/utils/formatters.js" defer></script>
+    <script src="src/utils/dom-helpers.js" defer></script>
+    <script src="src/utils/sanitization.js" defer></script>
+    <script src="src/utils/clipboard.js" defer></script>
+    <script src="src/utils/notifications.js" defer></script>
+    <!-- Page Script -->
+    <script src="src/js/total-risk-calculator.js" defer></script>
 </head>
 
 <body>
+    <!-- Screen reader live region -->
+    <div id="aria-live" aria-live="polite" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Results will be announced here.</div>
     <!-- Main Container -->
     <section id="top"></section>
     <div class="container">
         <div class="header">
-            <a href="https://www.reddit.com/r/swingtrading/" target="_blank"><img src="media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;"></a>
+            <a href="https://www.reddit.com/r/swingtrading/" target="_blank"><img src="public/media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;"></a>
             <h1 class="title">Position Sizing Calculator</h1>
         </div>
         <hr>
@@ -46,7 +59,7 @@
                     <span class="info-tooltip">The total amount of capital you have in your trading account. This is used to calculate the maximum risk and position allotment.</span>
                 </span>
             </label>
-            <input type="number" id="accountValue" min="0" step="0.01" value="10000" required>
+            <input type="number" id="accountValue" min="0" step="0.01" value="10000" placeholder="e.g., 10000" required>
         </div>
 
         <div class="form-group">
@@ -56,7 +69,7 @@
                  The percentage of your total account value you are willing to risk on a single trade. This is used to calculate the maximum risk.
                 </span>
             </span>
-             <p><input type="number" id="riskPercentage" name="riskPercentage" step="0.1" min="0" max="100" value="1">
+             <p><input type="number" id="riskPercentage" name="riskPercentage" step="0.1" min="0" max="100" value="1" placeholder="0–100">
         </label>
         
        
@@ -74,7 +87,7 @@
                         <span class="info-tooltip">The price at which you plan to enter the trade.
                         </span>
                 </label>
-                <input type="number" id="entryPrice" min="0" step="0.01" value="100" required>
+                <input type="number" id="entryPrice" min="0" step="0.01" value="100" placeholder="e.g., 100.50" required>
             </div>
 
             <div style="flex: 1;">
@@ -85,7 +98,7 @@
                     </span>
                 </label>
                 
-                <input type="number" id="stopLoss" min="0" step="0.01" value="90" required>
+                <input type="number" id="stopLoss" min="0" step="0.01" value="90" placeholder="e.g., 95.00" required>
             </div>
         </div>
 
@@ -97,7 +110,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="number" id="maxPositions" min="1">
+                <input type="number" id="maxPositions" min="1" placeholder="e.g., 10">
             </div>
 
             <div style="flex: 1;">
@@ -107,7 +120,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" id="tickerSymbol">
+                <input type="text" id="tickerSymbol" placeholder="e.g., AAPL">
             </div>
         </div>
 
@@ -124,14 +137,14 @@
     </div>
     <p></p>
     <center>
-    <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="media/redditicon.jpg" style="width:25px;height:25px;"></a>
-    <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="media/discordicon.png" style="width:25px;height:25px;"></a>
+    <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="public/media/redditicon.jpg" style="width:25px;height:25px;"></a>
+    <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="public/media/discordicon.png" style="width:25px;height:25px;"></a>
     
     <div>
         <b>Other Calculators:</b>                  
         Total Account Risk % |
-        <a href="dollarcalculator.html">Dollar Amount Risk</a> |
-        <a href="positionpercentcalculator.html">Position % Risk</a>
+        <a href="dollar-risk-calculator.html">Dollar Amount Risk</a> |
+        <a href="position-percent-calculator.html">Position % Risk</a>
     </div>
     </center> 
 
@@ -142,34 +155,34 @@
             <p style="color: blue; font-style: italic;">Click any blue result to copy to clipboard.</p>
             <div id="position-indicator" class="position-indicator"></div>
 
-            <div class="result-item" onclick="copyToClipboard('max-shares')">
+            <div class="result-item">
                 Max Shares: <span id="max-shares" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('position-size')">
+            <div class="result-item">
                 Position Size: $<span id="position-size" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('risk-per-share')">
+            <div class="result-item">
                 Risk per Share: $<span id="risk-per-share" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('percent-risked')">
+            <div class="result-item">
                 Trade Risk: <span id="percent-risked" class="copyable">-</span>%
             </div>
-            <div class="result-item" onclick="copyToClipboard('dollars-risked')">
+            <div class="result-item">
                 Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('one-r')">
+            <div class="result-item">
                 1R: $<span id="one-r" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('two-r')">
+            <div class="result-item">
                 2R: $<span id="two-r" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('three-r')">
+            <div class="result-item">
                 3R: $<span id="three-r" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('max-positions')">
+            <div class="result-item">
                 Max Positions: <span id="max-positions" class="copyable">-</span>
             </div>
-            <div class="result-item" onclick="copyToClipboard('position-allotment')">
+            <div class="result-item">
                 Position Allotment: $<span id="position-allotment" class="copyable">-</span>
             </div>
         </section>
@@ -180,42 +193,7 @@
                 <div id="results-container">
                 </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const resultElements = document.querySelectorAll('.copyable');
-                resultElements.forEach(element => {
-                    element.addEventListener('click', function () {
-                        const range = document.createRange();
-                        range.selectNodeContents(element);
-                        const selection = window.getSelection();
-                        selection.removeAllRanges();
-                        selection.addRange(range);
-                        document.execCommand('copy');
-                        
-                        // Show copied animation
-                        const copiedFeedback = document.createElement('span');
-                        copiedFeedback.classList.add('copied-feedback');
-                        copiedFeedback.textContent = 'Copied!';
-                        document.body.appendChild(copiedFeedback);
-                        
-                        const rect = element.getBoundingClientRect();
-                        copiedFeedback.style.left = `${rect.left + window.scrollX}px`;
-                        copiedFeedback.style.top = `${rect.top + window.scrollY - 30}px`;
-                        
-                        setTimeout(() => {
-                            copiedFeedback.style.opacity = '1';
-                            copiedFeedback.style.transform = 'translateY(0)';
-                        }, 10);
-                        
-                        setTimeout(() => {
-                            copiedFeedback.style.opacity = '0';
-                            copiedFeedback.style.transform = 'translateY(-10px)';
-                            setTimeout(() => document.body.removeChild(copiedFeedback), 300);
-                        }, 1000);
-                    });
-                });
-            });
-            </script>
+        
 
          <!-- Instructions 
         <p>

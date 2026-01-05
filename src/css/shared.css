@@ -1,0 +1,354 @@
+/* Shared Styles for All Position Sizing Calculators */
+
+/* Base Styles */
+body {
+    font-size: var(--font-size-normal);
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2px;
+    background-color: var(--background-color);
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Container Styles */
+.container {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-large);
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: var(--font-size-large);
+    margin: 0;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    transition: border-color var(--transition-standard);
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+input[type="number"] {
+    margin-bottom: 10px;
+}
+
+/* Validation Error Styles */
+input.error {
+    border-color: var(--error-color);
+}
+.error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-small);
+    margin-top: 4px;
+}
+
+/* Subtle hint shown beneath invalid inputs */
+.hint-message {
+    color: var(--gray-color);
+    font-size: var(--font-size-small);
+    margin-top: 2px;
+}
+
+/* Tooltips */
+.info-icon {
+    cursor: help;
+    position: relative;
+    display: inline-block;
+}
+
+.info-tooltip {
+    display: none;
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 8px;
+    border-radius: var(--border-radius-small);
+    font-size: var(--font-size-medium);
+    width: 200px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.info-icon:hover .info-tooltip {
+    display: block;
+}
+
+/* Buttons */
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-size: var(--font-size-normal);
+}
+
+button:hover {
+    background: var(--secondary-color);
+}
+
+.copy-button {
+    background: var(--gray-color);
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: var(--font-size-small);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.preset-buttons button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+}
+
+.preset-buttons button:hover {
+    background-color: var(--secondary-color);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-medium);
+}
+
+/* Input Container */
+.input-container {
+    background: var(--light-bg);
+    border: 1px solid #c2d4f1;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 0;
+    margin-bottom: 15px;
+    box-shadow: var(--box-shadow-light);
+}
+
+/* Results & History */
+#result, #recent-results {
+    margin-top: 10px;
+    padding: 15px;
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+}
+
+#result-dollar, #results-container-dollar {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+    padding: 15px;
+}
+
+#history-dollar, #history-section {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+    padding: 15px;
+}
+
+.results-section, .results-container, .results-dollar {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.result-item {
+    margin: 10px 0;
+}
+
+.result-item:hover {
+    background-color: #e9ecef;
+    box-shadow: var(--box-shadow-light);
+}
+
+.result-item:active {
+    background-color: #e2e6ea;
+}
+
+.recent-result {
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 0;
+}
+
+.recent-result:last-child {
+    border-bottom: none;
+}
+
+.ticker-symbol {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.position-indicator {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Copyable Elements */
+.copyable {
+    cursor: pointer;
+    color: blue;
+    font-weight: bold;
+}
+
+.copyable:hover {
+    text-decoration: underline;
+}
+
+/* Copy Feedback Animation */
+.copied-feedback {
+    position: absolute;
+    background-color: var(--success-color);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity var(--transition-standard), transform var(--transition-standard);
+}
+
+.result-item .copied-feedback {
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    font-size: var(--font-size-small);
+    color: green;
+    display: none;
+}
+
+.result-item.copied .copied-feedback {
+    display: inline;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-standard), text-decoration var(--transition-standard);
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+a:active {
+    color: var(--secondary-color);
+    opacity: 0.8;
+}
+
+.external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.external-link img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.external-link:hover img {
+    transform: scale(1.1);
+}
+
+/* Utility Classes */
+.scrolldown {
+    margin-top: 20px;
+}
+
+/* Sections */
+.disclaimer, .about, .support {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.results-section, .history-section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Slider Styles (used by some calculators) */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-medium);
+    margin-top: 5px;
+}
+
+#riskPercentage {
+    flex: 1;
+}
+
+#riskPercentageInput {
+    width: 60px;
+    padding: 4px;
+    text-align: right;
+}
+
+#riskPercentageValue {
+    min-width: 40px;
+}

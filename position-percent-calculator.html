@@ -11,25 +11,39 @@
     </script>
     <meta property="og:title" content="Position Sizing Calculator: Position %">
     <meta property="og:description" content="Calculate your position sizing with ease using our free Position Sizing Calculator. Optimize your trades and manage risks effectively!">
-    <meta property="og:image" content="media/rswingtrading_icon.jpg">
+    <meta property="og:image" content="public/media/rswingtrading_icon.jpg">
     <meta property="og:url" content="">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="media/rswingtrading_icon.jpg">
+    <link rel="icon" type="image/x-icon" href="public/media/rswingtrading_icon.jpg">
     <!-- Local -->
     <title>Position Sizing Calculator: Position %</title>
-    <link rel="stylesheet" type="text/css" href="positionpercentcalculator.css">
-    <script src="positionpercentcalculator.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="src/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="src/css/shared.css">
+    <link rel="stylesheet" type="text/css" href="src/css/position-percent-specific.css">
+    <!-- Utilities -->
+    <script src="src/constants.js" defer></script>
+    <script src="src/utils/validators.js" defer></script>
+    <script src="src/utils/calculators.js" defer></script>
+    <script src="src/utils/formatters.js" defer></script>
+    <script src="src/utils/dom-helpers.js" defer></script>
+    <script src="src/utils/sanitization.js" defer></script>
+    <script src="src/utils/clipboard.js" defer></script>
+    <script src="src/utils/notifications.js" defer></script>
+    <!-- Page Script -->
+    <script src="src/js/position-percent-calculator.js" defer></script>
 </head>
 
 <body>
+    <!-- Screen reader live region -->
+    <div id="aria-live" aria-live="polite" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Results will be announced here.</div>
     <!-- Main Container -->
     <div class="container">
         <div class="header">
             <a href="https://www.reddit.com/r/swingtrading/" target="_blank">
-            <img src="media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;">
+            <img src="public/media/rswingtrading_icon.jpg" alt="Reddit r/swingtrading" class="icon" style="width:50px;height:50px;">
             </a>
             <h1 class="title">Position Sizing Calculator</h1>
         </div>
@@ -50,13 +64,13 @@
                             <span class="info-tooltip">The total amount of capital you have in your trading account or amount you are willing to commit to the trade.</span>
                         </span>
                     </label>
-                    <input type="number" id="accountValue" min="0" step="1" value="10000" required>
+                    <input type="number" id="accountValue" min="0" step="1" value="10000" placeholder="e.g., 10000" required>
                 </div>
 
                 <div class="form-group">
                     <label for="riskPercentage">Position Risk %</label>
                     <div class="slider-input-container">
-                        <input type="number" id="riskPercentage" name="riskPercentage" step="1" min="0" max="100" value="1" style="flex: 1;">
+                        <input type="number" id="riskPercentage" name="riskPercentage" step="1" min="0" max="100" value="1" placeholder="0–100" style="flex: 1;">
                         <input type="range" id="riskPercentageSlider" min="0" max="100" step="1" value="1" style="flex: 1;">
                     </div>
                 </div>
@@ -80,7 +94,7 @@
                                 <span class="info-tooltip">The price at which you plan to enter the trade.</span>
                             </span>
                         </label>
-                        <input type="number" id="entryPrice" min="0" step="0.01" value="100" required>
+                        <input type="number" id="entryPrice" min="0" step="0.01" value="100" placeholder="e.g., 100.50" required>
                     </div>
                 
                     <div style="flex: 1;">
@@ -89,7 +103,7 @@
                                 <span class="info-tooltip">The price at which you plan to exit the trade if it goes against you.</span>
                             </span>
                         </label>
-                        <input type="number" id="stopLoss" min="0" step="0.01" value="90" required>
+                        <input type="number" id="stopLoss" min="0" step="0.01" value="90" placeholder="e.g., 95.00" required>
                     </div>
                 </div>
 
@@ -102,7 +116,7 @@
                                 <span class="info-tooltip">This field is for your own reference and does not affect calculations.</span>
                             </span>
                         </label>
-                        <input type="text" id="tickerSymbol">
+                        <input type="text" id="tickerSymbol" placeholder="e.g., AAPL">
                     </div>
                 </div>
 
@@ -121,13 +135,13 @@
                 </div>
             </div>
             <center>
-                <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="media/redditicon.jpg" style="width:25px;height:25px;"></a>
-                <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="media/discordicon.png" style="width:25px;height:25px;"></a>
+                <a href="https://www.reddit.com/r/swingtrading/" alt="Reddit r/swingtrading" target="_blank"><img src="public/media/redditicon.jpg" style="width:25px;height:25px;"></a>
+                <a href="https://discord.gg/yWFavAVQpm" target="_blank"><img src="public/media/discordicon.png" style="width:25px;height:25px;"></a>
                 
                 <div>
                     <b>Other Calculators:</b>                  
-                    <a href="index.html">Total Account Risk %</a> |
-                    <a href="dollarcalculator.html">Dollar Amount Risk</a> |
+                    <a href="total-risk-calculator.html">Total Account Risk %</a> |
+                    <a href="dollar-risk-calculator.html">Dollar Amount Risk</a> |
                     Position % Risk
                 </div>
                 </center> 

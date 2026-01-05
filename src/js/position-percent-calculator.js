@@ -1,3 +1,4 @@
+// @ts-check
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const accountValueInput = document.getElementById('accountValue');
@@ -58,25 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add copy functionality to all copyable elements
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('copyable')) {
-            const textToCopy = e.target.textContent;
-            if (textToCopy && textToCopy !== '-') {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    // Visual feedback
-                    const originalColor = e.target.style.color;
-                    e.target.style.color = 'green';
-                    setTimeout(() => {
-                        e.target.style.color = originalColor;
-                    }, 300);
-                });
-            }
+    // Clear field-level errors on input
+    ['accountValue','riskPercentage','entryPrice','stopLoss'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => clearFieldError(id));
         }
     });
+
+    // Keyboard shortcuts: Enter to calculate, Escape to clear
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            calculate();
+        } else if (e.key === 'Escape') {
+            if (clearButton) clearButton.click();
+        }
+    });
+
+    // Init global clipboard handler
+    if (typeof initClipboard === 'function') {
+        initClipboard();
+    }
 });
 
 function calculate() {
+    /**
+     * Position Percent calculator compute handler
+     * @returns {void}
+     */
     // Get input values
     const accountValue = parseFloat(document.getElementById('accountValue').value);
     const riskPercentage = parseFloat(document.getElementById('riskPercentage').value);
@@ -84,34 +94,41 @@ function calculate() {
     const stopLoss = parseFloat(document.getElementById('stopLoss').value);
     const tickerSymbol = document.getElementById('tickerSymbol').value || "N/A";
 
+    // Clear previous field errors
+    clearFieldErrors(['accountValue','riskPercentage','entryPrice','stopLoss']);
     // Validate inputs
-    if (isNaN(accountValue) || isNaN(riskPercentage) || isNaN(entryPrice) || isNaN(stopLoss)) {
-        alert('Please fill in all required fields with valid values');
+    if (!validateInputs({ accountValue, riskPercentage, entryPrice, stopLoss })) {
+        if (!isValidNumber(accountValue)) showFieldError('accountValue', ERROR_MESSAGES.invalidNumber);
+        if (!isValidNumber(riskPercentage)) showFieldError('riskPercentage', ERROR_MESSAGES.invalidPercentage);
+        if (!isValidNumber(entryPrice)) showFieldError('entryPrice', ERROR_MESSAGES.invalidNumber);
+        if (!isValidNumber(stopLoss)) showFieldError('stopLoss', ERROR_MESSAGES.invalidNumber);
+        focusFirstInvalid(['accountValue','riskPercentage','entryPrice','stopLoss']);
+        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.fixFields);
         return;
     }
 
     if (riskPercentage < 0 || riskPercentage > 100) {
-        alert('Position Risk % must be between 0 and 100');
+        showFieldError('riskPercentage', ERROR_MESSAGES.percentageRange);
+        focusFirstInvalid(['riskPercentage']);
+        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.percentageRange);
         return;
     }
 
     // Determine if the position is Long or Short
     const positionIndicator = document.getElementById('position-indicator');
-    let positionType;
-    if (entryPrice > stopLoss) {
-        positionType = "Long Position";
-        positionIndicator.textContent = positionType;
-    } else if (stopLoss > entryPrice) {
-        positionType = "Short Position";
-        positionIndicator.textContent = positionType;
-    } else {
-        positionIndicator.textContent = "Entry price and Stop are equal.";
-        alert('Entry price and Stop Loss cannot be equal');
+    const positionType = determinePositionType(entryPrice, stopLoss);
+    if (positionType === 'Invalid') {
+        updateText('position-indicator', 'Entry price and Stop are equal.');
+        showFieldError('entryPrice', ERROR_MESSAGES.entryStopEqual);
+        showFieldError('stopLoss', ERROR_MESSAGES.entryStopEqual);
+        focusFirstInvalid(['entryPrice','stopLoss']);
+        if (typeof notify === 'function') notify('error', ERROR_MESSAGES.entryStopEqual);
         return;
     }
+    updateText('position-indicator', positionType);
 
     // Calculate core variables
-    const riskPerShare = Math.abs(entryPrice - stopLoss);
+    const riskPerShare = calculateRiskPerShare(entryPrice, stopLoss);
     const positionAllocation = (accountValue * riskPercentage) / 100;
     const maxShares = positionAllocation / entryPrice;
     const positionSize = maxShares * entryPrice;
@@ -119,18 +136,21 @@ function calculate() {
     const percentRisked = (dollarsRisked / accountValue) * 100;
 
     // Update DOM with formatted numbers
-    document.getElementById('max-shares').textContent = maxShares.toFixed(4);
-    document.getElementById('position-size').textContent = positionSize.toFixed(2);
-    document.getElementById('risk-per-share').textContent = riskPerShare.toFixed(2);
-    document.getElementById('percent-risked').textContent = percentRisked.toFixed(2);
-    document.getElementById('dollars-risked').textContent = dollarsRisked.toFixed(2);
+    updateText('max-shares', formatShares(maxShares));
+    updateText('position-size', formatCurrency(positionSize));
+    updateText('risk-per-share', formatCurrency(riskPerShare));
+    updateText('percent-risked', formatPercentage(percentRisked));
+    updateText('dollars-risked', formatCurrency(dollarsRisked));
 
     // Update history
     const timestamp = new Date().toLocaleString();
+    const ariaLive = document.getElementById('aria-live');
+    if (ariaLive) ariaLive.textContent = `Calculated: Max Shares ${maxShares.toFixed(4)}, Position Size $${positionSize.toFixed(2)}`;
     const resultContainer = document.getElementById('results-container');
+    const safeTicker = escapeHTML(tickerSymbol);
     const historyHTML = `
         <div class="recent-result">
-            <strong>Ticker Symbol:</strong> ${tickerSymbol}<br>
+            <strong>Ticker Symbol:</strong> ${safeTicker}<br>
             <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
             <strong>Position Risk %:</strong> ${riskPercentage}%<br>
             <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
@@ -144,5 +164,8 @@ function calculate() {
             <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
             <strong>Timestamp:</strong> ${timestamp}
         </div>`;
-    resultContainer.insertAdjacentHTML('afterbegin', historyHTML);
+    addHistoryEntry('results-container', historyHTML);
+
+    // Success notification
+    if (typeof notify === 'function') notify('success','Calculation complete.');
 }
