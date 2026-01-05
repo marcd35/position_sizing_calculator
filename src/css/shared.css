@@ -1186,6 +1186,21 @@ a:active {
   transform: scale(1.1);
 }
 
+/* GitHub icon theme switching */
+.github-icon-dark {
+  display: none;
+}
+
+[data-theme='dark'] .github-icon-light,
+[data-theme='grayscale'] .github-icon-light {
+  display: none;
+}
+
+[data-theme='dark'] .github-icon-dark,
+[data-theme='grayscale'] .github-icon-dark {
+  display: inline;
+}
+
 /* Utility Classes */
 .scrolldown {
   margin-top: 20px;

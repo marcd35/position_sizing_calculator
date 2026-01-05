@@ -23,29 +23,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="public/media/rswingtrading_icon.jpg" />
+    <!-- Local -->
     <title>Position Sizing Calculator - Trading Risk Management Tools</title>
     <link rel="stylesheet" type="text/css" href="src/css/variables.css" />
     <link rel="stylesheet" type="text/css" href="src/css/shared.css" />
+    <!-- Layout Script -->
+    <script src="src/js/layout.js" defer></script>
     <style>
       .landing-container {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 2rem 1rem;
       }
       
-      .header {
+      .landing-header {
         text-align: center;
         margin-bottom: 3rem;
+        padding-top: 1rem;
       }
       
-      .header h1 {
+      .landing-header h1 {
         color: var(--color-text-primary);
         margin-bottom: 1rem;
+        font-size: 2rem;
       }
       
-      .header p {
+      .landing-header p {
         color: var(--color-text-secondary);
         font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
       }
       
       .calculators-grid {
@@ -66,13 +73,18 @@
       
       .calculator-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-color: var(--color-primary);
       }
       
       .calculator-card h2 {
         color: var(--color-primary);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
       
       .calculator-card p {
@@ -89,46 +101,79 @@
         border-radius: 4px;
         font-size: 0.75rem;
         font-weight: bold;
-        margin-left: 0.5rem;
         text-transform: uppercase;
+      }
+
+      @media (max-width: 768px) {
+        .landing-header h1 {
+          font-size: 1.5rem;
+        }
+        
+        .landing-header p {
+          font-size: 1rem;
+        }
+        
+        .calculator-card h2 {
+          font-size: 1.25rem;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div class="landing-container">
-      <div class="header">
-        <h1>Position Sizing Calculators</h1>
-        <p>Professional trading risk management tools to optimize your position sizing</p>
-      </div>
+    <!-- Screen reader live region -->
+    <div
+      id="aria-live"
+      aria-live="polite"
+      style="
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "
+    >
+      Results will be announced here.
+    </div>
+    
+    <!-- Main Container -->
+    <section id="top"></section>
+    <div class="container">
+      <div class="landing-container">
+        <div class="landing-header">
+          <h1>Choose Your Calculator</h1>
+          <p>Professional trading risk management tools to optimize your position sizing</p>
+        </div>
 
-      <div class="calculators-grid">
-        <a href="total-risk-calculator.html" class="calculator-card">
-          <h2>
-            Total Account Risk Calculator
-            <span class="recommended-badge">Recommended</span>
-          </h2>
-          <p>
-            Calculate your position size based on your total account value and risk percentage per trade. 
-            Ideal for managing overall portfolio risk and maintaining consistent risk across all trades.
-          </p>
-        </a>
+        <div class="calculators-grid">
+          <a href="total-risk-calculator.html" class="calculator-card">
+            <h2>
+              <span>Total Account Risk Calculator</span>
+              <span class="recommended-badge">Recommended</span>
+            </h2>
+            <p>
+              Calculate your position size based on your total account value and risk percentage per trade. 
+              Ideal for managing overall portfolio risk and maintaining consistent risk across all trades.
+            </p>
+          </a>
 
-        <a href="dollar-risk-calculator.html" class="calculator-card">
-          <h2>Dollar Risk Calculator</h2>
-          <p>
-            Determine your position size based on a specific dollar amount you're willing to risk. 
-            Perfect when you have a fixed dollar risk budget per trade.
-          </p>
-        </a>
+          <a href="dollar-risk-calculator.html" class="calculator-card">
+            <h2>Dollar Risk Calculator</h2>
+            <p>
+              Determine your position size based on a specific dollar amount you're willing to risk. 
+              Perfect when you have a fixed dollar risk budget per trade.
+            </p>
+          </a>
 
-        <a href="position-percent-calculator.html" class="calculator-card">
-          <h2>Position Percentage Calculator</h2>
-          <p>
-            Calculate the percentage of your account to allocate to a position based on your entry, 
-            stop loss, and desired risk. Great for position allocation strategies.
-          </p>
-        </a>
+          <a href="position-percent-calculator.html" class="calculator-card">
+            <h2>Position Percentage Calculator</h2>
+            <p>
+              Calculate the percentage of your account to allocate to a position based on your entry, 
+              stop loss, and desired risk. Great for position allocation strategies.
+            </p>
+          </a>
+        </div>
       </div>
     </div>
   </body>

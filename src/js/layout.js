@@ -257,7 +257,8 @@
       '    </div>' +
       '    <div class="site-footer__icons" aria-label="Community links">' +
       '      <a class="external-link" href="https://github.com/marcd35/position_sizing_calculator" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">' +
-      '        <img src="public/media/github-mark.png" alt="" />' +
+      '        <img src="public/media/github-mark.png" alt="" class="github-icon-light" />' +
+      '        <img src="public/media/github-mark-white.png" alt="" class="github-icon-dark" />' +
       '      </a>' +
       '      <a class="external-link" href="https://www.reddit.com/r/swingtrading/" target="_blank" rel="noopener noreferrer" aria-label="r/swingtrading on Reddit">' +
       '        <img src="public/media/redditicon.jpg" alt="" />' +
