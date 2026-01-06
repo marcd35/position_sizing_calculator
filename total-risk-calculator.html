@@ -218,21 +218,37 @@
           <!-- Results -->
           <section id="result" class="results-section">
             <h2>Results</h2>
-
-            <div class="result-item">
-              Position Size: $<span id="position-size" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Risk per Share: $<span id="risk-per-share" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Trade Risk: <span id="percent-risked" class="copyable">-</span>%
-            </div>
-            <div class="result-item">
-              Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              <b>Max Shares Allowed:</b> <span id="max-shares" class="copyable">-</span>
+            <div class="results-grid">
+              <!-- Header Row -->
+              <div class="results-header">
+                <span class="metric-header">Metric</span>
+                <span class="value-header">Value</span>
+              </div>
+              <!-- Position Size Row -->
+              <div class="result-row">
+                <span class="metric">Position Size</span>
+                <span class="value" id="position-size">-</span>
+              </div>
+              <!-- Risk per Share Row -->
+              <div class="result-row">
+                <span class="metric">Risk per Share</span>
+                <span class="value" id="risk-per-share">-</span>
+              </div>
+              <!-- Dollars Risked Row -->
+              <div class="result-row">
+                <span class="metric">Dollars Risked</span>
+                <span class="value" id="dollars-risked">-</span>
+              </div>
+              <!-- Trade Risk Row -->
+              <div class="result-row">
+                <span class="metric">Trade Risk</span>
+                <span class="value" id="percent-risked">-</span>
+              </div>
+              <!-- Max Shares Row -->
+              <div class="result-row">
+                <span class="metric">Max Shares Allowed</span>
+                <span class="value copyable" id="max-shares">-</span>
+              </div>
             </div>
           </section>
         </section>

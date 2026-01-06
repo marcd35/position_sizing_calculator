@@ -1,11 +1,11 @@
 /**
- * Formats a number as currency (USD)
+ * Formats a number as currency (USD) with $ prefix
  * @param {number} value
  * @returns {string}
  */
 function formatCurrency(value) {
   if (!isValidNumber(value)) return '-';
-  return parseFloat(value).toFixed(2);
+  return '$' + parseFloat(value).toFixed(2);
 }
 
 /**
@@ -19,11 +19,11 @@ function formatShares(value) {
 }
 
 /**
- * Formats a number as percentage
+ * Formats a number as percentage with % suffix
  * @param {number} value
  * @returns {string}
  */
 function formatPercentage(value) {
   if (!isValidNumber(value)) return '-';
-  return parseFloat(value).toFixed(2);
+  return parseFloat(value).toFixed(2) + '%';
 }

@@ -160,22 +160,37 @@
           <!-- Results Section -->
           <section id="result-dollar" class="results-section">
             <h2>Results</h2>
-            <p class="results-help">Results</p>
-            <div class="result-item">
-              Position Size: $<span id="position-size-dollar" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Risk per Share: $<span id="risk-per-share-dollar" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Dollars Risked: $<span id="dollars-risked-dollar" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Position Size as % of Account:
-              <span id="position-percent-account" class="copyable">-</span>%
-            </div>
-            <div class="result-item" style="font-weight: 600;">
-              Max Shares Allowed: <span id="max-shares-dollar" class="copyable">-</span>
+            <div class="results-grid">
+              <!-- Header Row -->
+              <div class="results-header">
+                <span class="metric-header">Metric</span>
+                <span class="value-header">Value</span>
+              </div>
+              <!-- Position Size Row -->
+              <div class="result-row">
+                <span class="metric">Position Size</span>
+                <span class="value" id="position-size-dollar">-</span>
+              </div>
+              <!-- Risk per Share Row -->
+              <div class="result-row">
+                <span class="metric">Risk per Share</span>
+                <span class="value" id="risk-per-share-dollar">-</span>
+              </div>
+              <!-- Dollars Risked Row -->
+              <div class="result-row">
+                <span class="metric">Dollars Risked</span>
+                <span class="value" id="dollars-risked-dollar">-</span>
+              </div>
+              <!-- Position % Row -->
+              <div class="result-row">
+                <span class="metric">Position Size as % of Account</span>
+                <span class="value" id="position-percent-account">-</span>
+              </div>
+              <!-- Max Shares Row -->
+              <div class="result-row">
+                <span class="metric">Max Shares Allowed</span>
+                <span class="value copyable" id="max-shares-dollar">-</span>
+              </div>
             </div>
           </section>
         </section>

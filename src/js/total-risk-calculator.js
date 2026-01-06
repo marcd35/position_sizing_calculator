@@ -295,7 +295,7 @@ function calculate(options) {
   updateText('max-shares', formatShares(maxShares));
   updateText('position-size', formatCurrency(positionSize));
   updateText('risk-per-share', formatCurrency(riskPerShare));
-  updateText('percent-risked', ((riskPerShare / entryPrice) * 100).toFixed(1));
+  updateText('percent-risked', formatPercentage((riskPerShare / entryPrice) * 100));
   updateText('dollars-risked', formatCurrency(dollarsRisked));
   updateText('one-r', formatCurrency(oneR));
   updateText('two-r', formatCurrency(twoR));
@@ -320,7 +320,7 @@ function calculate(options) {
     const safeTicker = escapeHTML(tickerSymbol);
     const historyHTML = `
             <div class="recent-result">
-                <strong>Timestamp:</strong> ${timestamp}<br>
+                ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
                 <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
                 <strong>Total Account Risk:</strong> ${riskPercentage}%<br>

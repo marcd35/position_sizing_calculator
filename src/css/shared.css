@@ -884,6 +884,79 @@ html[data-theme='grayscale'] .btn--primary:hover {
   box-shadow: var(--box-shadow-light);
 }
 
+/* Results Grid Layout - 2 column format (Metric | Value) */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  font-size: 15px;
+}
+
+/* Header row styling */
+.results-header {
+  display: contents;
+}
+
+.results-header .metric-header,
+.results-header .value-header {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  padding: 8px 0;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.results-header .value-header {
+  text-align: right;
+}
+
+/* Result row styling */
+.result-row {
+  display: contents;
+}
+
+.result-row .metric {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.result-row .value {
+  font-family: var(--font-family-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Last row - remove border */
+.result-row:last-child .metric,
+.result-row:last-child .value {
+  border-bottom: none;
+}
+
+/* Hover effect */
+.result-row:hover .metric,
+.result-row:hover .value {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Copyable value styling */
+.result-row .value.copyable {
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: all var(--transition-standard);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: -4px -8px;
+}
+
+.result-row .value.copyable:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--secondary-color);
+}
+
 /* Fix clipping on results container */
 #result-dollar,
 #results-container-dollar {
@@ -952,9 +1025,9 @@ html[data-theme='grayscale'] .btn--primary:hover {
 }
 
 .result-item:hover {
-  background-color: var(--surface-hover);
-  transform: translateX(4px);
-  border-bottom-color: var(--primary-color);
+  background-color: inherit;
+  transform: none;
+  border-bottom-color: inherit;
 }
 
 .result-item:active {

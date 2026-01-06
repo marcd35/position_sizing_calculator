@@ -266,7 +266,7 @@ function calculate(options) {
     const safeTicker = escapeHTML(tickerSymbol);
     const historyHTML = `
             <div class="recent-result">
-                <strong>Timestamp:</strong> ${timestamp}<br>
+                ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
                 <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
                 <strong>Position Risk %:</strong> ${riskPercentage}%<br>

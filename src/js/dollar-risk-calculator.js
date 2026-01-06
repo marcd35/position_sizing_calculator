@@ -206,7 +206,7 @@ function dollarCalculator(options) {
   updateText('position-size-dollar', formatCurrency(positionSize));
   updateText('risk-per-share-dollar', formatCurrency(riskPerShare));
   updateText('dollars-risked-dollar', formatCurrency(dollarsRisked));
-  updateText('position-percent-account', positionPercentAccount);
+  updateText('position-percent-account', positionPercentAccount + '%');
 
   // Update history (only on manual submit)
   const timestamp = new Date().toLocaleString();
@@ -219,7 +219,7 @@ function dollarCalculator(options) {
     const safeTicker = escapeHTML(tickerSymbol);
     const historyHTML = `
             <div class="recent-result">
-                strong>Timestamp:</strong> ${timestamp}<br>
+                ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
                 <strong>Dollar Risk:</strong> $${dollarRisk.toFixed(2)}<br>
                 <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
