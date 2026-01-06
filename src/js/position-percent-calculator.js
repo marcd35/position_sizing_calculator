@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Clear button
   if (clearButton) {
     clearButton.addEventListener('click', () => {
-      // Clear all input fields
+      // Clear all input fields - set to empty string to show blank instead of placeholder
       accountValueInput.value = '';
-      riskPercentageInput.value = '1';
-      riskPercentageSlider.value = '1';
+      riskPercentageInput.value = '';
+      riskPercentageSlider.value = '';
       entryPriceInput.value = '';
       stopLossInput.value = '';
       tickerSymbolInput.value = '';
@@ -84,30 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initClipboard === 'function') {
     initClipboard();
   }
-
-  const inputIds = [
-    'accountValue',
-    'riskPercentage',
-    'riskPercentageSlider',
-    'entryPrice',
-    'stopLoss',
-    'tickerSymbol',
-  ];
-  const scheduleAutoCalc =
-    typeof debounce === 'function'
-      ? debounce(() => calculate({ source: 'auto' }), 250)
-      : () => calculate({ source: 'auto' });
-
-  inputIds.forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('input', () => scheduleAutoCalc());
-      el.addEventListener('change', () => scheduleAutoCalc());
-    }
-  });
-
-  // Initial calculation with defaults (silent)
-  scheduleAutoCalc();
 });
 
 function calculate(options) {
@@ -228,7 +204,8 @@ function calculate(options) {
   const positionType = determinePositionType(entryPrice, stopLoss);
   if (positionType === 'Invalid') {
     setResultsDisabled('result', true);
-    updateText('position-indicator', 'Entry price and Stop are equal.');
+    const indicator = document.getElementById('position-indicator');
+    if (indicator) indicator.innerHTML = '&#x2195;';
     if (positionIndicator) positionIndicator.removeAttribute('data-position');
     if (positionIndicatorDiv) positionIndicatorDiv.removeAttribute('data-position');
     showFieldError('entryPrice', ERROR_MESSAGES.entryStopEqual);
@@ -248,7 +225,11 @@ function calculate(options) {
   }
 
   setResultsDisabled('result', false);
-  updateText('position-indicator', positionType);
+
+  // Set arrow symbol based on position type
+  const arrowSymbol = positionType === 'Long Position' ? '&#x2191;' : '&#x2193;';
+  const indicator = document.getElementById('position-indicator');
+  if (indicator) indicator.innerHTML = arrowSymbol;
 
   // Set data attribute for styling (long = blue, short = orange)
   const positionValue = positionType.toLowerCase().split(' ')[0];

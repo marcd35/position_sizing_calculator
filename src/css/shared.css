@@ -174,32 +174,7 @@ html[data-theme='grayscale'] .theme-switcher__btn:hover {
   background: var(--surface-hover);
 }
 
-/* Grayscale theme - Position Indicator */
-html[data-theme='grayscale'] .position-indicator[data-position='long'],
-html[data-theme='grayscale'] .position-indicator:has(#position-indicator[data-position='long']) {
-  background: linear-gradient(135deg, rgba(122, 122, 122, 0.15), rgba(106, 106, 106, 0.08));
-  border-color: #7a7a7a;
-  border-left: 4px solid #7a7a7a;
-}
 
-html[data-theme='grayscale'] .position-indicator[data-position='short'],
-html[data-theme='grayscale'] .position-indicator:has(#position-indicator[data-position='short']) {
-  background: linear-gradient(135deg, rgba(122, 122, 122, 0.15), rgba(106, 106, 106, 0.08));
-  border-color: #888888;
-  border-left: 4px solid #888888;
-}
-
-html[data-theme='grayscale'] #position-indicator[data-position='long'] {
-  background: linear-gradient(135deg, #7a7a7a, #6a6a6a);
-  color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(122, 122, 122, 0.4);
-}
-
-html[data-theme='grayscale'] #position-indicator[data-position='short'] {
-  background: linear-gradient(135deg, #888888, #7a7a7a);
-  color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(136, 136, 136, 0.4);
-}
 
 /* Grayscale theme - Clear Button (danger button) */
 html[data-theme='grayscale'] .btn--danger {
@@ -958,19 +933,13 @@ html[data-theme='grayscale'] .btn--primary:hover {
   margin-left: auto;
 }
 
+/* Remove all special styling - now matches standard .result-item */
 .result-item--primary {
-  padding: 20px 24px;
-  border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius);
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(6, 182, 212, 0.05));
-  margin: 20px 0;
-  box-shadow: var(--box-shadow-medium);
-}
-
-.result-item--primary .copyable {
-  font-size: 1.75em;
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-mono);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
 }
 
 .results-section {
@@ -1037,76 +1006,27 @@ html[data-theme='grayscale'] .btn--primary:hover {
   color: var(--primary-color);
 }
 
-/* Modern toggle-style position indicator */
-.position-indicator {
-  border-radius: 50px;
-  border: 2px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 20px;
-  margin-bottom: 20px;
-  background: var(--surface-hover);
-  transition: all var(--transition-standard);
-}
-
-/* When position type is Long - Blue */
-.position-indicator[data-position='long'],
-.position-indicator:has(#position-indicator[data-position='long']) {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.08));
-  border-color: #3b82f6;
-  border-left: 4px solid #3b82f6;
-}
-
-/* When position type is Short - Orange */
-.position-indicator[data-position='short'],
-.position-indicator:has(#position-indicator[data-position='short']) {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.08));
-  border-color: #f97316;
-  border-left: 4px solid #f97316;
-}
-
+/* Minimalist position indicator - arrow styling */
 #position-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  border-radius: 50px;
+  justify-content: center;
+  font-size: 42px;
   font-weight: var(--font-weight-bold);
-  font-size: 14px;
   transition: all var(--transition-standard);
-  margin-left: auto;
-  background: var(--surface-hover);
-  color: var(--text-color);
+  line-height: 1;
 }
 
-/* Long position - Blue with up arrow */
+/* Long position styling - blue up arrow */
 #position-indicator[data-position='long'] {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  color: #2563eb;
+  text-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
 }
 
-#position-indicator[data-position='long']::before {
-  content: '▲';
-  font-size: 12px;
-  margin-right: 4px;
-  color: white;
-}
-
-/* Short position - Orange with down arrow */
+/* Short position styling - orange down arrow */
 #position-indicator[data-position='short'] {
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  color: white;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-}
-
-#position-indicator[data-position='short']::before {
-  content: '▼';
-  font-size: 12px;
-  margin-right: 4px;
-  color: white;
+  color: #ea580c;
+  text-shadow: 0 0 8px rgba(234, 88, 12, 0.3);
 }
 
 /* Copyable Elements */

@@ -94,10 +94,10 @@
               />
             </div>
 
-            <div class="form-group" style="display: flex; gap: 15px">
+            <div class="form-group" style="display: flex; gap: 15px; margin-bottom: 20px;">
               <div style="flex: 1">
-                <label
-                  >Entry Price
+                <label for="entryPrice">
+                  Entry Price
                   <span class="info-icon"
                     >ⓘ
                     <span class="info-tooltip"
@@ -116,9 +116,13 @@
                 />
               </div>
 
+              <div style="padding: 28px 0;">
+                <span id="position-indicator" data-position="long">↑</span>
+              </div>
+
               <div style="flex: 1">
-                <label
-                  >Stop Loss
+                <label for="stopLoss">
+                  Stop Loss
                   <span class="info-icon"
                     >ⓘ
                     <span class="info-tooltip"
@@ -214,14 +218,7 @@
           <!-- Results -->
           <section id="result" class="results-section">
             <h2>Results</h2>
-            <p class="results-help">Tap/click a result to copy.</p>
-            <div class="position-indicator">
-              Position Type: <span id="position-indicator">-</span>
-            </div>
 
-            <div class="result-item">
-              Max Shares: <span id="max-shares" class="copyable">-</span>
-            </div>
             <div class="result-item">
               Position Size: $<span id="position-size" class="copyable">-</span>
             </div>
@@ -231,17 +228,11 @@
             <div class="result-item">
               Trade Risk: <span id="percent-risked" class="copyable">-</span>%
             </div>
-            <div class="result-item result-item--primary">
+            <div class="result-item">
               Dollars Risked: $<span id="dollars-risked" class="copyable">-</span>
             </div>
-            <div class="result-item">1R: $<span id="one-r" class="copyable">-</span></div>
-            <div class="result-item">2R: $<span id="two-r" class="copyable">-</span></div>
-            <div class="result-item">3R: $<span id="three-r" class="copyable">-</span></div>
             <div class="result-item">
-              Max Positions: <span id="max-positions" class="copyable">-</span>
-            </div>
-            <div class="result-item">
-              Position Allotment: $<span id="position-allotment" class="copyable">-</span>
+              <b>Max Shares Allowed:</b> <span id="max-shares" class="copyable">-</span>
             </div>
           </section>
         </section>

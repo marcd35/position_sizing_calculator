@@ -50,31 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('input', () => clearFieldError(id));
     }
   });
-
-  const scheduleAutoCalc =
-    typeof debounce === 'function'
-      ? debounce(() => dollarCalculator({ source: 'auto' }), 250)
-      : () => dollarCalculator({ source: 'auto' });
-
-  inputIds.forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('input', () => scheduleAutoCalc());
-      el.addEventListener('change', () => scheduleAutoCalc());
-    }
-  });
-
-  // Keyboard shortcuts: Enter to calculate, Escape to clear
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      dollarCalculator({ source: 'manual' });
-    } else if (e.key === 'Escape') {
-      if (clearButton) clearButton.click();
-    }
-  });
-
-  // Initial calculation with defaults (silent)
-  scheduleAutoCalc();
 });
 
 function dollarCalculator(options) {
@@ -177,7 +152,8 @@ function dollarCalculator(options) {
   const positionType = determinePositionType(entryPrice, stopLoss);
   if (positionType === 'Invalid') {
     setResultsDisabled('result-dollar', true);
-    updateText('position-indicator', 'Entry price and Stop are equal.');
+    const indicator = document.getElementById('position-indicator');
+    if (indicator) indicator.innerHTML = '&#x2195;';
     if (positionIndicatorSpan) positionIndicatorSpan.removeAttribute('data-position');
     if (positionIndicatorDiv) positionIndicatorDiv.removeAttribute('data-position');
     showFieldError('entryPriceDollar', ERROR_MESSAGES.entryStopEqual);
@@ -197,7 +173,11 @@ function dollarCalculator(options) {
   }
 
   setResultsDisabled('result-dollar', false);
-  updateText('position-indicator', positionType);
+
+  // Set arrow symbol based on position type
+  const arrowSymbol = positionType === 'Long Position' ? '&#x2191;' : '&#x2193;';
+  const indicator = document.getElementById('position-indicator');
+  if (indicator) indicator.innerHTML = arrowSymbol;
 
   // Set data attribute for styling (long = blue, short = orange)
   // Extract just "long" or "short" from "Long Position" or "Short Position"

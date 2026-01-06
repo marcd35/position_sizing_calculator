@@ -85,7 +85,7 @@
               />
             </div>
 
-            <div class="form-group" style="display: flex; gap: 15px">
+            <div class="form-group" style="display: flex; gap: 15px; margin-bottom: 20px;">
               <div style="flex: 1">
                 <label for="entryPriceDollar">Entry Price</label>
                 <input
@@ -97,6 +97,10 @@
                   placeholder="e.g., 100.50"
                   required
                 />
+              </div>
+
+              <div style="padding: 28px 0;">
+                <span id="position-indicator" data-position="long">↑</span>
               </div>
 
               <div style="flex: 1">
@@ -156,25 +160,22 @@
           <!-- Results Section -->
           <section id="result-dollar" class="results-section">
             <h2>Results</h2>
-            <p class="results-help">Tap/click a result to copy.</p>
-            <div class="position-indicator">
-              Position Type: <span id="position-indicator">-</span>
-            </div>
-            <div class="result-item">
-              Max Shares: <span id="max-shares-dollar" class="copyable">-</span>
-            </div>
+            <p class="results-help">Results</p>
             <div class="result-item">
               Position Size: $<span id="position-size-dollar" class="copyable">-</span>
             </div>
             <div class="result-item">
               Risk per Share: $<span id="risk-per-share-dollar" class="copyable">-</span>
             </div>
-            <div class="result-item result-item--primary">
+            <div class="result-item">
               Dollars Risked: $<span id="dollars-risked-dollar" class="copyable">-</span>
             </div>
             <div class="result-item">
               Position Size as % of Account:
               <span id="position-percent-account" class="copyable">-</span>%
+            </div>
+            <div class="result-item" style="font-weight: 600;">
+              Max Shares Allowed: <span id="max-shares-dollar" class="copyable">-</span>
             </div>
           </section>
         </section>
