@@ -100,9 +100,9 @@ body {
 .theme-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   background: #ffffff;
-  border: 1px solid #3a3a3a;
+  /* border: 1px solid #ff000025; */
   border-radius: 10px;
   padding: 5px;
 }
@@ -145,11 +145,12 @@ html[data-theme='grayscale'] {
 
 html[data-theme='dark'] .theme-switcher {
   background: var(--surface-color);
-  border: 1px solid #b8b8b8;
+  /* border: 1px solid #b8b8b8; */
 }
 
 html[data-theme='dark'] .theme-switcher__btn {
   background: var(--surface-color);
+  border: 1px solid #f8fafc;
 }
 
 html[data-theme='dark'] .theme-switcher__btn[aria-checked='true'] {
@@ -158,8 +159,9 @@ html[data-theme='dark'] .theme-switcher__btn[aria-checked='true'] {
 
 /* Grayscale theme adjustments for theme switcher */
 html[data-theme='grayscale'] .theme-switcher {
-  background: #6a6a6a;
-  border: 1px solid #f0f0f0;
+  /* background: #6a6a6a; */
+  background: var(--surface-color);
+  /* border: 1px solid #f0f0f0; */
 }
 
 html[data-theme='grayscale'] .theme-switcher__btn {
