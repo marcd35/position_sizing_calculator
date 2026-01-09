@@ -221,17 +221,21 @@ function dollarCalculator(options) {
             <div class="recent-result">
                 ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
-                <strong>Dollar Risk:</strong> $${dollarRisk.toFixed(2)}<br>
-                <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
-                <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
-                <strong>Account Size:</strong> ${!isNaN(accountSize) && accountSize > 0 ? `$${accountSize.toFixed(2)}` : 'N/A'}<br>
+                <strong>Dollar Risk:</strong> ${dollarRisk.toFixed(2)}<br>
+                <strong>Entry Price:</strong> ${entryPrice.toFixed(2)}<br>
+                <strong>Stop Loss:</strong> ${stopLoss.toFixed(2)}<br>
+                <strong>Account Size:</strong> ${!isNaN(accountSize) && accountSize > 0 ? `${accountSize.toFixed(2)}` : 'N/A'}<br>
                 <strong>Position Type:</strong> ${positionType}<br><br>
                 <strong>Result:</strong><br>
                 <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
-                <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
-                <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
-                <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
+                <strong>Position Size:</strong> ${positionSize.toFixed(2)}<br>
+                <strong>Risk per Share:</strong> ${riskPerShare.toFixed(2)}<br>
+                <strong>Dollars Risked:</strong> ${dollarsRisked.toFixed(2)}<br>
                 <strong>Position Size as % of Account:</strong> ${positionPercentAccount !== 'N/A' ? `${positionPercentAccount}%` : 'N/A'}<br>
+                <div class="copy-all-row">
+                    <span class="copy-all-label">COPY ALL:</span>
+                    <span class="copy-all-btn copyable" aria-label="Copy all values">📋</span>
+                </div>
             </div>`;
     addHistoryEntry('results-container', historyHTML);
   }

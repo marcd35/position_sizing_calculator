@@ -1138,6 +1138,47 @@ html[data-theme='grayscale'] .btn--primary:hover {
   transition:
     opacity var(--transition-standard),
     transform var(--transition-standard);
+  z-index: 1000;
+}
+
+/* Copy All Button Styles */
+.copy-all-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.copy-all-label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.copy-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  background: var(--light-bg);
+  cursor: pointer;
+  transition: all var(--transition-standard);
+}
+
+.copy-all-btn:hover {
+  border-color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.copy-all-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .result-item .copied-feedback {

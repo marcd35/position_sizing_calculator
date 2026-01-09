@@ -322,23 +322,27 @@ function calculate(options) {
             <div class="recent-result">
                 ${timestamp}<br>
                 <strong>Ticker Symbol:</strong> ${safeTicker}<br>
-                <strong>Account Value:</strong> $${accountValue.toFixed(2)}<br>
+                <strong>Account Value:</strong> ${accountValue.toFixed(2)}<br>
                 <strong>Total Account Risk:</strong> ${riskPercentage}%<br>
-                <strong>Entry Price:</strong> $${entryPrice.toFixed(2)}<br>
-                <strong>Stop Loss:</strong> $${stopLoss.toFixed(2)}<br>
+                <strong>Entry Price:</strong> ${entryPrice.toFixed(2)}<br>
+                <strong>Stop Loss:</strong> ${stopLoss.toFixed(2)}<br>
                 <strong>Position Type:</strong> ${positionType}<br>
                 <strong>Max Positions Allowed:</strong> ${maxPositionsInput || 'N/A'}<br><br>
                 <strong>Result:</strong><br>
                 <strong>Max Shares:</strong> ${maxShares.toFixed(4)}<br>
-                <strong>Position Size:</strong> $${positionSize.toFixed(2)}<br>
-                <strong>Risk per Share:</strong> $${riskPerShare.toFixed(2)}<br>
+                <strong>Position Size:</strong> ${positionSize.toFixed(2)}<br>
+                <strong>Risk per Share:</strong> ${riskPerShare.toFixed(2)}<br>
                 <strong>Trade Risk:</strong> ${((riskPerShare / entryPrice) * 100).toFixed(1)}%<br>
-                <strong>Dollars Risked:</strong> $${dollarsRisked.toFixed(2)}<br>
-                <strong>1R:</strong> $${oneR.toFixed(2)}<br>
-                <strong>2R:</strong> $${twoR.toFixed(2)}<br>
-                <strong>3R:</strong> $${threeR.toFixed(2)}<br>
+                <strong>Dollars Risked:</strong> ${dollarsRisked.toFixed(2)}<br>
+                <strong>1R:</strong> ${oneR.toFixed(2)}<br>
+                <strong>2R:</strong> ${twoR.toFixed(2)}<br>
+                <strong>3R:</strong> ${threeR.toFixed(2)}<br>
                 <strong>Max Positions:</strong> ${maxPositionsInput || 'N/A'}<br>
-                <strong>Position Allotment:</strong> ${positionAllotment !== 'N/A' ? `$${positionAllotment.toFixed(4)}` : 'N/A'}<br>
+                <strong>Position Allotment:</strong> ${positionAllotment !== 'N/A' ? `${positionAllotment.toFixed(4)}` : 'N/A'}<br>
+                <div class="copy-all-row">
+                    <span class="copy-all-label">COPY ALL:</span>
+                    <span class="copy-all-btn copyable" aria-label="Copy all values">📋</span>
+                </div>
             </div>`;
     addHistoryEntry('results-container', historyHTML);
   }
